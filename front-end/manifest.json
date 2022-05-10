@@ -1,37 +1,34 @@
 {
   "name": "Github Recommendation Extension",
-  "description": "Build an Extension!",
+  "description": "This library adds repository recommendation to Github.com",
   "version": "1.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["storage", "activeTab", "scripting"],
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "/images/get_started16.png",
-      "32": "/images/get_started32.png",
-      "48": "/images/get_started48.png",
-      "128": "/images/get_started128.png"
+      "16": "/images/black-cat.png",
+      "32": "/images/black-cat.png",
+      "48": "/images/black-cat.png",
+      "128": "/images/black-cat.png"
     }
   },
-  "icons": {
-    "16": "/images/get_started16.png",
-    "32": "/images/get_started32.png",
-    "48": "/images/get_started48.png",
-    "128": "/images/get_started128.png"
+  "icons": {   
+    "16": "/images/black-cat.png",
+    "32": "/images/black-cat.png",
+    "48": "/images/black-cat.png",
+    "128": "/images/black-cat.png"
   },
-  "options_page": "options.html",
-  "commands": {
-    "_execute_action": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+F",
-        "mac": "MacCtrl+Shift+F"
-      },
-      "description": "Opens hello.html"
+  "content_scripts": [
+    { "matches": ["*://*.github.com/"],
+	    "js": ["contentScript.js"],
+	    "exclude_matches": []
     }
-  }
-
-  
+  ]
 }
