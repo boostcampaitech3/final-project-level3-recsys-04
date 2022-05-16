@@ -1,3 +1,3 @@
-import WeatherCard from './WeatherCard'
+import WeatherCard from './RepoCard'
 
 export default WeatherCard
