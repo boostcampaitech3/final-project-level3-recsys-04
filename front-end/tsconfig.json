@@ -3,8 +3,7 @@
     "jsx": "react",
     "module": "es6",
     "target": "es6",
-    "moduleResolution": "node"
-  },
-  "include":["src/**/*.ts", "src/**/*.tsx"],
-  "exclude": ["node_modules"]
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  }
 }
