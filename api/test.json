@@ -1,0 +1,41 @@
+{
+    "login": "hawe66",
+    "id": 67923359,
+    "node_id": "MDQ6VXNlcjY3OTIzMzU5",
+    "avatar_url": "https://avatars.githubusercontent.com/u/67923359?v=4",
+    "gravatar_id": "",
+    "url": {
+      "first" : "https://api.github.com/users/hawe66",
+      "second": "https://api.github.com/users/hawe99"
+    },
+    "url_list": [
+      "https://api.github.com/users/hawe66",
+      "https://api.github.com/users/hawe99"
+    ],
+    "html_url": "https://github.com/hawe66",
+    "followers_url": "https://api.github.com/users/hawe66/followers",
+    "following_url": "https://api.github.com/users/hawe66/following{/other_user}",
+    "gists_url": "https://api.github.com/users/hawe66/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/hawe66/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/hawe66/subscriptions",
+    "organizations_url": "https://api.github.com/users/hawe66/orgs",
+    "repos_url": "https://api.github.com/users/hawe66/repos",
+    "events_url": "https://api.github.com/users/hawe66/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/hawe66/received_events",
+    "type": "User",
+    "site_admin": false,
+    "name": "Youngha Jo",
+    "company": "Naver boostcamp",
+    "blog": "",
+    "location": null,
+    "email": null,
+    "hireable": null,
+    "bio": "Youngha Jo",
+    "twitter_username": null,
+    "public_repos": 6,
+    "public_gists": 0,
+    "followers": 1,
+    "following": 1,
+    "created_at": "2020-07-06T18:19:32Z",
+    "updated_at": "2022-04-20T12:21:41Z"
+  }
