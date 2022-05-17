@@ -1,10 +1,6 @@
 const mysql      = require('mysql');
-const connection = mysql.createConnection({
-  host     : '34.64.174.211',
-  user     : 'scientist',
-  password : 'bcscientist',
-  database : 'final_project'
-});
+const dbconfig   = require('./authenticate.js');
+const connection = mysql.createConnection(dbconfig);
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
