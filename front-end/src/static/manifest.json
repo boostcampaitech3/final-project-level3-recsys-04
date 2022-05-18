@@ -1,7 +1,7 @@
 {
   "name": "Github Recommendation Extension",
   "description": "This library adds repository recommendation to Github.com",
-  "version": "1.0",
+  "version": "1.0.0",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
@@ -13,17 +13,17 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "/images/black-cat.png",
-      "32": "/images/black-cat.png",
-      "48": "/images/black-cat.png",
-      "128": "/images/black-cat.png"
+      "16": "black-cat.png",
+      "32": "black-cat.png",
+      "48": "black-cat.png",
+      "128": "black-cat.png"
     }
   },
   "icons": {   
-    "16": "/images/black-cat.png",
-    "32": "/images/black-cat.png",
-    "48": "/images/black-cat.png",
-    "128": "/images/black-cat.png"
+    "16": "black-cat.png",
+    "32": "black-cat.png",
+    "48": "black-cat.png",
+    "128": "black-cat.png"
   },
   "content_scripts": [
     { "matches": ["*://*.github.com/"],
