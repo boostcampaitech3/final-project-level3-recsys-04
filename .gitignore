@@ -1,1 +1,3 @@
 api/authenticate.json
+dist
+node_modules

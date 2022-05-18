@@ -5,11 +5,20 @@ export interface Repo {
   stars: number
 }
 
+let dummyRepo: [Repo] = [
+  {
+    name: "Repo Name",
+    login: "Yejin",
+    stars: 0
+  }
+]
+
 export async function inference(username: string) : Promise<any> {
   const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
 	// 404 처리하기
 	if (!res.ok) {
-		throw new Error('City not found')
+    return dummyRepo
+		// throw new Error('Repo not found')
 	}
 	const data = await res.json()
 	return data // JSON 데이터

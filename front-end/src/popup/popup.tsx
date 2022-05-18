@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import './popup.css'
+import { Repo, inference } from '../utils/api'
+import RepoCard from './RepoCard'
 
 const App: React.FC<{}> = () => {
+  
   return (
     <div>
-      <img src="icon.png" />
+      <RepoCard username='jonyejin'></RepoCard>
     </div>
   )
 }
