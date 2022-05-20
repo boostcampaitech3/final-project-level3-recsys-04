@@ -4,8 +4,17 @@ module.exports = function(app, conn)
     var request = require('request')
     const fetch = require("node-fetch");
 
+    var repo_list = [];
+    
+    function get_repo_id(posts){
+        for (const i in posts){
+            repo_list.push(posts[i].id);
+        }
+        return repo_list
+    }
+
     app.get('/inference/starred/repo/:username',function(req,res){
-        let username = req.params;
+        let username = req.params.username;
 
         // 1. get starred repos from DB, user table
         /*
@@ -31,8 +40,7 @@ module.exports = function(app, conn)
         */
         fetch(`https://api.github.com/users/${username}/starred`)
             .then((response) => response.json())
-            .then((posts) => get_repo_list(posts))
-            .then((repo_lists) => res.send(repo_lists)) // TODO: filter and insert user table, repo_user table
+            .then((posts) => res.send(posts)) // TODO: filter and insert user table, repo_user table
             .catch((error) => console.log("error:", error));
 
         // res.send(candidate_repos);
