@@ -1,17 +1,13 @@
-module.exports = function(app)
+module.exports = function(app, conn)
 {    
     var fs = require('fs');
     var url = require('url');
 
-    app.get('/fetch/starred/list/:username/starred',function(req,res){
-        let {username} = req.params;
-        // read file from chrome extension
-        fs.readFile(`/api/users/${username}/starred`, 'utf8', function(err, description){
-            const obj = JSON.parse(description);
-            var arr= [];
-            arr.push(obj.name);
-            arr.push(obj.id);            
-            res.end(arr);
-          });
+    app.get('{api}/fetch/starred/list/:username/:starcount',function(req,res){
+        let {username, starcount} = req.params;
+        fetch(`https://api.github.com/users/${username}/starred`)
+            .then((response) => response.json())
+            .then((posts) => console.log(posts.length)) // TODO: check whether to update 
+            .catch((error) => console.log("error:", error));
     });
 }
