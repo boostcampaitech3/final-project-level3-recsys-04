@@ -13,12 +13,24 @@ let dummyRepo: [Repo] = [
   }
 ]
 
+// 추천 결과 받아오기
 export async function inference(username: string) : Promise<any> {
   const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
 	// 404 처리하기
 	if (!res.ok) {
     return dummyRepo
 		// throw new Error('Repo not found')
+	}
+	const data = await res.json()
+	return data // JSON 데이터
+}
+
+// 레포지토리를 구경할 때
+export async function clickedRepo(username: string, repoId:string) : Promise<any> {
+  const res = await fetch(`${baseURL}/clicked/repo`, makeBody({'username': username, 'repoId': repoId}))
+	// 404 처리하기
+	if (!res.ok) {
+		throw new Error('Repo Click API 404')
 	}
 	const data = await res.json()
 	return data // JSON 데이터
@@ -37,5 +49,5 @@ function makeBody(body={}) {
     redirect: 'follow', // manual, *follow, error
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(body), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
-  }
+  } as RequestInit
 }
