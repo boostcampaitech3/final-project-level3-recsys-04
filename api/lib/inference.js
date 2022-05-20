@@ -2,6 +2,7 @@ module.exports = function(app, conn)
 {    
     var fs = require('fs');
     var request = require('request')
+    const fetch = require("node-fetch");
 
     app.get('/inference/starred/repo/:username',function(req,res){
         let username = req.params;

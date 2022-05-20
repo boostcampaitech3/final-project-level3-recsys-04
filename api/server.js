@@ -2,6 +2,7 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
+const fetch = require("node-fetch");
 
 var express = require('express');
 const mysql      = require('mysql');
