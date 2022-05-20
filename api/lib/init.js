@@ -29,7 +29,7 @@ module.exports = function(app, conn)
     } 
     */ 
 
-    app.get('{api}/init/:username/:starcount',function(req,res){
+    app.get('/init/:username/:starcount',function(req,res){
         let {username, starcount} = req.params;
         result["username"] = username
 

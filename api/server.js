@@ -5,7 +5,7 @@ var qs = require('querystring');
 
 var express = require('express');
 const mysql      = require('mysql');
-const dbconfig   = require('./authenticate.js');
+const dbconfig   = require('./authenticate.json');
 const conn = mysql.createConnection(dbconfig);
 var app = express();
 
@@ -15,7 +15,6 @@ app.engine('html', require('ejs').renderFile);
 
 var router = require('./router/main')(app, conn);
 var init = require('./lib/init')(app, conn);
-var fetch = require('./lib/fetch')(app, conn);
 var update = require('./lib/update')(app, conn);
 var inference = require('./lib/inference')(app, conn);
 // next cycle

@@ -1,11 +1,9 @@
-const { DefaultDeserializer } = require('v8');
-
 module.exports = function(app, conn)
 {    
     var fs = require('fs');
     var request = require('request')
 
-    app.get('{api}/inference/starred/repo/:username',function(req,res){
+    app.get('/inference/starred/repo/:username',function(req,res){
         let username = req.params;
 
         // 1. get starred repos from DB, user table
@@ -39,7 +37,7 @@ module.exports = function(app, conn)
         // res.send(candidate_repos);
     });
 
-    app.post('{api}/inference/starred/repo/:username',function(req,res){
+    app.post('/inference/starred/repo/:username',function(req,res){
         let username = req.params;
         let candidates = req.body["candidate_repos"]        
         
