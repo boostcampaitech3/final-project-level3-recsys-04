@@ -1,9 +1,9 @@
-module.exports = function(app)
+module.exports = function(app, conn)
 {    
     var fs = require('fs');
     var url = require('url');
 
-    app.get('/update/starred/list/:username/:starcount',function(req,res){
+    app.get('{api}/update/starred/list/:username/:starcount',function(req,res){
         let {username, starcount} = req.params;
         // read file from chrome extension
         fs.readFile(`/api/update/starred/list/${username}/${starcount}`, 'utf8', function(err, description){

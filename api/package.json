@@ -2,8 +2,10 @@
     "name": "github-recommendation",
     "version": "1.0.0",
     "dependencies": {
+        "ejs": "^2.4.1",
         "express": "^4.17.1",
         "mysql": "^2.18.1",
-        "ejs": "^2.4.1" 
+        "node-fetch": "^2.6.7",
+        "request": "^2.88.2"
     }
-  }
+}

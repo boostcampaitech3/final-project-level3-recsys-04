@@ -1,4 +1,4 @@
-module.exports = function(app)
+module.exports = function(app, conn)
 {    
     var fs = require('fs');
     var url = require('url');
@@ -27,7 +27,7 @@ module.exports = function(app)
             }
 
             // ADD TO DATA
-            users[username] = req.body;
+            repos[repo].push(req.body["username"]);
 
             // SAVE DATA
             fs.writeFile(__dirname + "/data/repo.json",
