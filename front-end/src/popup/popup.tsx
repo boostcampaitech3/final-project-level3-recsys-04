@@ -15,4 +15,5 @@ const App: React.FC<{}> = () => {
 
 const root = document.createElement('div')
 document.body.appendChild(root)
+console.log("useEffect 나타남")
 ReactDOM.render(<App />, root)

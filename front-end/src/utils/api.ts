@@ -4,25 +4,36 @@ export interface Repo {
   login: string
   stars: number
 }
+export interface RepoList {
+  repoList: Repo[]
+}
 
-let dummyRepo: [Repo] = [
-  {
-    name: "Repo Name",
-    login: "Yejin",
-    stars: 0
-  }
-]
+let dR1: Repo = {
+  name: "Repo Name",
+  login: "Yejin",
+  stars: 0
+}
+let dR2: Repo = {
+  name: "레포 이름22",
+  login: "Yejin",
+  stars: 0
+}
+let ar: RepoList = {
+  repoList: [dR1, dR2]
+}
 
 // 추천 결과 받아오기
 export async function inference(username: string) : Promise<any> {
-  const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
-	// 404 처리하기
-	if (!res.ok) {
-    return dummyRepo
+  // const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
+	// // 404 처리하기
+	// if (!res.ok) {
+    console.log("여기는?")
+    console.log(ar)
+    return ar
 		// throw new Error('Repo not found')
-	}
-	const data = await res.json()
-	return data // JSON 데이터
+	// }
+	// const data = await res.json()
+	// return data // JSON 데이터
 }
 
 // 레포지토리를 구경할 때

@@ -1,1 +1,2 @@
-import RepoCard from "./RepoCard";
+import RepoCard from './RepoCard'
+export default RepoCard

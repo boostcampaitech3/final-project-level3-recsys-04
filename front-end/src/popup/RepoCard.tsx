@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom';
-import { Repo, inference } from '../utils/api'
+import { Repo, RepoList, inference } from '../utils/api'
 
 import {
   Box,
@@ -17,27 +17,32 @@ const RepoCard: React.FC<{
   username: string
 }> = ({ username }) => {
   // 뷰 안에서 data를 track 하기 위해서
-  const [repoData, setRepoData] = useState<Repo|null>(null)
+  const [repoData, setRepoData] = useState<RepoList|null>(null)
   
   // API 호출해주기
   useEffect(()=> {
+    console.log("useEffect 나타남")
     inference(username)
       .then((data)=> {
+        console.log(data)
         setRepoData(data)
       })
       .catch(err => console.log(err))
-  }, [username])
+  }, []) // 끝에 배열 -> @param deps — If present, effect will only activate if the values in the list change.
 
   if (!repoData){
     return <div>no data...</div>
   }
 
   return(
-  <Card>
-    <CardContent>
-      <Typography variant="h5">{repoData.login}</Typography>
-    </CardContent>
-  </Card>
+    <div> {repoData.repoList.map((repo, index) => (
+        <Card>
+        <CardContent>
+          <Typography variant="h5">{repo.name}</Typography>
+        </CardContent>
+        </Card>
+        ))}
+    </div>
   )
 }
 
