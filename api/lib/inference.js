@@ -6,7 +6,7 @@ module.exports = function(app, conn)
 
     var repo_list = [];
     
-    function get_repo_id(posts){
+    function get_repo_ids(posts){
         for (const i in posts){
             repo_list.push(posts[i].id);
         }

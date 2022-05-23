@@ -7,7 +7,7 @@ module.exports = function(app, conn)
     var result = {};
     var repo_list = [];
     
-    function get_repo_list(posts){
+    function get_repo_ids(posts){
         for (const i in posts){
             repo_list.push(posts[i].id);
         }
@@ -35,7 +35,7 @@ module.exports = function(app, conn)
 
         fetch(`https://api.github.com/users/${username}/starred`)
             .then((response) => response.json())
-            .then((posts) => get_repo_list(posts))
+            .then((posts) => get_repo_ids(posts))
             .then((repo_lists) => res.send(repo_lists)) // TODO: filter and insert user table, repo_user table
             .catch((error) => console.log("error:", error));
     });
