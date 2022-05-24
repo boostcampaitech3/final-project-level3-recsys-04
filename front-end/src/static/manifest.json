@@ -8,8 +8,9 @@
   },
   "permissions": [
     "storage",
-    "activeTab"
-    // "webRequest"
+    "activeTab",
+    "webRequest",
+    "contextMenus"
   ],
   "action": {
     "default_popup": "popup.html",
@@ -27,7 +28,7 @@
     "128": "black-cat.png"
   },
   "content_scripts": [
-    { "matches": ["*://*.github.com/"],
+    { "matches": ["<all_urls>"],
 	    "js": ["contentScript.js"],
 	    "exclude_matches": []
     }

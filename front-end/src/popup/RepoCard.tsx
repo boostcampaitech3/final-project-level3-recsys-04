@@ -17,7 +17,7 @@ const RepoCard: React.FC<{
   username: string
 }> = ({ username }) => {
   // 뷰 안에서 data를 track 하기 위해서
-  const [repoData, setRepoData] = useState<RepoList|null>(null)
+  const [repoData, setRepoData] = useState<Repo[]|null>(null)
   
   // API 호출해주기
   useEffect(()=> {
@@ -35,7 +35,7 @@ const RepoCard: React.FC<{
   }
 
   return(
-    <div> {repoData.repoList.map((repo, index) => (
+    <div> {repoData.map((repo, index) => (
         <Card>
         <CardContent>
           <Typography variant="h5">{repo.name}</Typography>

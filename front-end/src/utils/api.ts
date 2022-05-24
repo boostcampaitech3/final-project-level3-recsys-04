@@ -1,8 +1,8 @@
-const baseURL = ''
+const baseURL = 'https://127.0.0.1:3001'
 export interface Repo {
   name: string
-  login: string
-  stars: number
+  // login: string
+  // stars: number
 }
 export interface RepoList {
   repoList: Repo[]
@@ -10,41 +10,63 @@ export interface RepoList {
 
 let dR1: Repo = {
   name: "Repo Name",
-  login: "Yejin",
-  stars: 0
+  // login: "Yejin",
+  // stars: 0
 }
 let dR2: Repo = {
   name: "레포 이름22",
-  login: "Yejin",
-  stars: 0
+  // login: "Yejin",
+  // stars: 0
+}
+let dR3: Repo = {
+  name: "레포 이름33",
+  // login: "Yejin",
+  // stars: 0
+}
+let dR4: Repo = {
+  name: "레포 이름44",
+  // login: "Yejin",
+  // stars: 0
+}
+let dR5: Repo = {
+  name: "레포 이름55",
+  // login: "Yejin",
+  // stars: 0
 }
 let ar: RepoList = {
-  repoList: [dR1, dR2]
+  repoList: [dR1, dR2, dR3, dR4, dR5]
 }
 
 // 추천 결과 받아오기
 export async function inference(username: string) : Promise<any> {
-  // const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
-	// // 404 처리하기
-	// if (!res.ok) {
-    console.log("여기는?")
-    console.log(ar)
-    return ar
-		// throw new Error('Repo not found')
-	// }
-	// const data = await res.json()
-	// return data // JSON 데이터
+  console.log(`${baseURL}/inference/starred/repo/${username}`)
+  const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
+	// 404 처리하기
+	if (!res.ok) {
+    // return ar
+		throw new Error('Repo not found')
+	}
+	const data: Repo[] = await res.json()
+  console.log("data받음")
+	return data // JSON 데이터
 }
 
 // 레포지토리를 구경할 때
 export async function clickedRepo(username: string, repoId:string) : Promise<any> {
-  const res = await fetch(`${baseURL}/clicked/repo`, makeBody({'username': username, 'repoId': repoId}))
-	// 404 처리하기
-	if (!res.ok) {
-		throw new Error('Repo Click API 404')
-	}
-	const data = await res.json()
-	return data // JSON 데이터
+  fetch(`${baseURL}/clicked/repo`, makeBody({'username': username, 'repoId': repoId}))
+  .then(res => {
+    //fetch를 통해 받아온 res객체 안에
+    //ok 프로퍼티가 있음
+      if (!res.ok) {
+        throw Error("could not fetch the data that resource");
+      }
+      return res.json();
+    })
+    .catch(err => {
+      console.log(err)
+    //에러시 Loading메세지 사라지고
+    //에러메세지만 보이도록 설정
+    });
 }
 
 function makeBody(body={}) {
