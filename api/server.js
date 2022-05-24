@@ -3,6 +3,7 @@ const https = require('https');
 const fs = require('fs');
 const url = require('url');
 const qs = require('querystring');
+const cors = require('cors');
 
 const bodyParser = require('body-parser');
 const express = require('express');
@@ -12,7 +13,7 @@ const dbconfig   = require('./authenticate.json');
 const conn = mysql.createConnection(dbconfig);
 const app = express();
 
-const options = { key: fs.readFileSync('/opt/ml/rootca.key'), cert: fs.readFileSync('/opt/ml/rootca.crt') };
+const options = { key: fs.readFileSync('rootca.key'), cert: fs.readFileSync('rootca.crt') };
 
 // Create an HTTP server. 
 http.createServer(app).listen(3000, function(){
@@ -27,6 +28,7 @@ app.engine('html', require('ejs').renderFile);
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
+app.use(cors());
 
 var router = require('./router/main')(app, conn);
 var init = require('./lib/init')(app, conn);

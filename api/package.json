@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "dependencies": {
         "body-parser": "^1.20.0",
+        "cors": "^2.8.5",
         "ejs": "^2.4.1",
         "express": "^4.17.1",
         "express-session": "^1.17.3",
