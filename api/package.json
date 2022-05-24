@@ -6,6 +6,8 @@
         "ejs": "^2.4.1",
         "express": "^4.17.1",
         "express-session": "^1.17.3",
+        "http": "^0.0.1-security",
+        "https": "^1.0.0",
         "mysql": "^2.18.1",
         "node-fetch": "^2.6.7",
         "request": "^2.88.2"
