@@ -8,6 +8,7 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
     var repo_list = [];
     
     function get_repo_ids(posts){
+        repo_list = [];
         for (const i in posts){
             repo_list.push(posts[i].id);
         }
@@ -38,6 +39,7 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
                 let filtered_lists = repo_lists.filter(x => urids.includes(x));
                 const InitUser = new UserSchema({
                     uid: uid,
+                    login: username,
                     star_pages: starcount,
                     star_in_item: filtered_lists // repo_lists 
                 });

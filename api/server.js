@@ -45,8 +45,8 @@ app.use(cors());
 
 var router = require('./router/main')(app, conn);
 var init = require('./lib/init')(app, UserSchema, RepoSchema, mongoose);
-var update = require('./lib/update')(app, conn);
-var inference = require('./lib/inference')(app, conn);
+var update = require('./lib/update')(app, UserSchema, RepoSchema, mongoose); 
+var inference = require('./lib/inference')(app, UserSchema, RepoSchema, mongoose);
 // next cycle
-// var coldstart = require('./lib/coldstart')(app, conn);
-var clicked = require('./lib/clicked')(app, conn);
+// var coldstart = require('./lib/coldstart')(app, UserSchema, RepoSchema, mongoose);
+var clicked = require('./lib/clicked')(app, UserSchema, RepoSchema, mongoose);
