@@ -6,11 +6,13 @@
   "background": {
     "service_worker": "background.js"
   },
+  "host_permissions": [ "*://*.github.com/*"],
   "permissions": [
     "storage",
     "activeTab",
     "webRequest",
-    "contextMenus"
+    "contextMenus",
+    "cookies"
   ],
   "action": {
     "default_popup": "popup.html",

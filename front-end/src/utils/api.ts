@@ -8,47 +8,39 @@ export interface RepoList {
   repoList: Repo[]
 }
 
-let dR1: Repo = {
-  name: "Repo Name",
-  // login: "Yejin",
-  // stars: 0
+// 최초 repository init시
+export async function initUser(username: string, starcount: number) : Promise<any> {
+  fetch(`${baseURL}/init/${username}/${starcount}`)
+  .then(res => {
+    //fetch를 통해 받아온 res객체 안에
+    //ok 프로퍼티가 있음
+      if (!res.ok) {
+        throw Error("could not fetch the data that resource");
+      }
+      return res.json();
+    })
+    .catch(err => {
+      console.log(err)
+    //에러시 Loading메세지 사라지고
+    //에러메세지만 보이도록 설정
+    });
 }
-let dR2: Repo = {
-  name: "레포 이름22",
-  // login: "Yejin",
-  // stars: 0
-}
-let dR3: Repo = {
-  name: "레포 이름33",
-  // login: "Yejin",
-  // stars: 0
-}
-let dR4: Repo = {
-  name: "레포 이름44",
-  // login: "Yejin",
-  // stars: 0
-}
-let dR5: Repo = {
-  name: "레포 이름55",
-  // login: "Yejin",
-  // stars: 0
-}
-let ar: RepoList = {
-  repoList: [dR1, dR2, dR3, dR4, dR5]
-}
-
-// 추천 결과 받아오기
-export async function inference(username: string) : Promise<any> {
-  console.log(`${baseURL}/inference/starred/repo/${username}`)
-  const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
-	// 404 처리하기
-	if (!res.ok) {
-    // return ar
-		throw new Error('Repo not found')
-	}
-	const data: Repo[] = await res.json()
-  console.log("data받음")
-	return data // JSON 데이터
+// coldstart(설치시)
+export async function coldstart() : Promise<any> {
+  fetch(`${baseURL}/coldstart`)
+  .then(res => {
+    //fetch를 통해 받아온 res객체 안에
+    //ok 프로퍼티가 있음
+      if (!res.ok) {
+        throw Error("could not fetch the data that resource");
+      }
+      return res.json();
+    })
+    .catch(err => {
+      console.log(err)
+    //에러시 Loading메세지 사라지고
+    //에러메세지만 보이도록 설정
+    });
 }
 
 // 레포지토리를 구경할 때
@@ -68,6 +60,47 @@ export async function clickedRepo(username: string, repoId:string) : Promise<any
     //에러메세지만 보이도록 설정
     });
 }
+
+// github repo에 star을 한다
+export async function star(username: string, repoId:string) : Promise<any> {
+  fetch(`${baseURL}/update/starred/repo/${username}/${repoId}`)
+  .then(res => {
+    //fetch를 통해 받아온 res객체 안에
+    //ok 프로퍼티가 있음
+      if (!res.ok) {
+        throw Error("could not fetch the data that resource");
+      }
+      return res.json();
+    })
+    .catch(err => {
+      console.log(err)
+    //에러시 Loading메세지 사라지고
+    //에러메세지만 보이도록 설정
+    });
+}
+
+// star 목록의 변동을 확인
+export async function checkStarList(username: string, starcount:number) : Promise<any> {
+}
+
+// 변동이 있다면 star목록을 업데이트
+export async function fetchStarList(username: string, starcount:number) : Promise<any> {
+}
+
+// 추천 결과 받아오기
+export async function inference(username: string) : Promise<any> {
+  console.log(`${baseURL}/inference/starred/repo/${username}`)
+  const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
+	// 404 처리하기
+	if (!res.ok) {
+    // return ar
+		throw new Error('Repo not found')
+	}
+	const data: Repo[] = await res.json()
+  console.log("data받음")
+	return data // JSON 데이터
+}
+
 
 function makeBody(body={}) {
   return {
