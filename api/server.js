@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
@@ -8,9 +10,20 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
 const session = require('express-session');
-const mysql      = require('mysql');
-const dbconfig   = require('./authenticate.json');
-const conn = mysql.createConnection(dbconfig);
+const mongoose = require('mongoose');
+const UserSchema = require("./lib/schema_user");
+const RepoSchema = require("./lib/schema_repo");
+mongoose.Promise = global.Promise; // Node 의 네이티브 Promise 사용
+// mongodb 연결
+const conn = mongoose.connect(process.env.MONGO_URI)
+.then(
+    (response) => {
+        console.log('Successfully connected to mongodb');
+    }
+).catch(e => {
+    console.error(e);
+});
+
 const app = express();
 
 const options = { key: fs.readFileSync('rootca.key'), cert: fs.readFileSync('rootca.crt') };
@@ -31,7 +44,7 @@ app.use(bodyParser.urlencoded());
 app.use(cors());
 
 var router = require('./router/main')(app, conn);
-var init = require('./lib/init')(app, conn);
+var init = require('./lib/init')(app, UserSchema, RepoSchema, mongoose);
 var update = require('./lib/update')(app, conn);
 var inference = require('./lib/inference')(app, conn);
 // next cycle

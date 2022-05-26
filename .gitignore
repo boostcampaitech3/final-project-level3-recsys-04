@@ -2,3 +2,4 @@ api/authenticate.json
 dist
 node_modules
 api/node_modules
+api/.env
