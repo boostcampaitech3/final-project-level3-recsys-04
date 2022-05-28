@@ -10,7 +10,6 @@ from typing import Optional
 from fastapi import FastAPI
 from pydantic import BaseModel
 from app.inference import inference_api
-from project.RecVAE.model import VAE
 import torch
 import numpy as np
 from scipy import sparse
