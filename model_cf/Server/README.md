@@ -1,4 +1,4 @@
-CF infer Server
+# CF infer Server
 
 ## How to start 
 ~# python main.py
