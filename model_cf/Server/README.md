@@ -11,4 +11,4 @@ post('/model')
 inference repo list
 
 post type Json
-{rid: [int]}
+{rid: list[int]}
