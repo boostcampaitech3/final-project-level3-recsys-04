@@ -1,9 +1,9 @@
 CF infer Server
 
-# How to start 
+## How to start 
 ~# python main.py
 
-#API list
+## API list
 get('/')
 checking Server on
 
