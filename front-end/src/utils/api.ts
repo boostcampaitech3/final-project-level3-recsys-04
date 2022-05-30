@@ -1,8 +1,11 @@
 const baseURL = 'https://127.0.0.1:3001'
 export interface Repo {
-  name: string
+  name: string,
   // login: string
-  // stars: number
+  stars: number,
+  languages: string,
+  description: string,
+  url: string
 }
 export interface RepoList {
   repoList: Repo[]
