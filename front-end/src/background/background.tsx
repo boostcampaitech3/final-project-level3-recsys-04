@@ -4,11 +4,6 @@ let isLogin = false
 let username=""
 let starcount=0
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
-  // TODO
-})
-
-
 /*
 호출 타이밍
 
@@ -67,6 +62,20 @@ chrome.webNavigation.onBeforeNavigate.addListener((details)=>{
   if (validateGithubView(details.url)){
     // 깃헙 레포를 구경했다.
     console.log("깃헙 레포 구경함~")
-    clickedRepo(username, "")
+
+    // contentScript에 메세지 보내주기
+    chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      },
+      (tabs) => {
+        if (tabs.length > 0) {
+          chrome.tabs.sendMessage(tabs[0].id, "abcd", (response)=>{
+            console.log(response)
+            // clickedRepo(username, "")
+          })
+        }
+      }
+    )
   }
 })
