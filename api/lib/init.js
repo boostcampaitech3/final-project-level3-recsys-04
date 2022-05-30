@@ -21,8 +21,8 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
         urids = jsondata.rids;
     });
     
-    app.get('/init/:username/:starcount',function(req,res){
-        let {username, starcount} = req.params;
+    app.get('/init/:username',function(req,res){
+        let username = req.params.username;
 
         fetch(`https://api.github.com/users/${username}`)
             .then((response) => response.json())
@@ -33,6 +33,7 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
             })        
             .then((response) => response.json())
             .then((posts) => {
+                let starcount = posts.length;
                 const repo_lists = get_repo_ids(posts);
                 console.log(repo_lists);
                 // TODO: get urids from DB
