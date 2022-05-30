@@ -30,6 +30,17 @@ if __name__ == '__main__':
         rid = item["rid"]
         star_user_list = item["star_user_list"]
 
-        user_info.update_many({"uid": {"$in": star_user_list}}, {"$push": {"star_in_item": rid}})
+        user_info.update_many(
+            {
+                "uid": {
+                    "$in": star_user_list
+                }
+            },
+            {
+                "$addToSet": {
+                    "star_in_item": rid
+                }
+            }
+        )
 
     print("DB update complete!")
