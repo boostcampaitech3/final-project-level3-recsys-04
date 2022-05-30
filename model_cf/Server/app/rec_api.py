@@ -70,10 +70,10 @@ def startup_event():
     db = conn.get_database("final_project") 
     collection = db.get_collection("model")
     ## model.pt download
-    download_file("test", collection)
+    download_file("all_test", collection)
 
     ## model.pt read
-    with open('test_nj_recomend.pt', 'rb') as f:
+    with open('all_recomend.pt', 'rb') as f:
         best_model = torch.load(f)
     
 @app.get("/")
