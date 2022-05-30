@@ -1,7 +1,6 @@
 module.exports = function(app, UserSchema, RepoSchema, mongoose)
 {    
     var fs = require('fs');
-    var url = require('url');
     const fetch = require("node-fetch");
 
     var urids;
@@ -39,7 +38,7 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
         if(urids.includes(repoId)){
             UserSchema.updateMany(
                 {login:username},
-                {$push:{"star_in_item":repoId}})
+                {$push:{"clicked":repoId}})
                 .then((result) => {
                     console.log(result);                
                     res.sendStatus(200);

@@ -24,29 +24,40 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
     app.get('/update/starred/repo/:username/:repo_id',function(req,res){
         let {username, repo_id} = req.params;
         // MONGODB -> INSERT (username, repo_id, starcount) into value (username, repo_id, starcount)
-        UserSchema.updateMany(
-            {login:username},
-            {$push:{"star_in_item":repo_id}})
-            .then((result) => {
-                console.log(result);                
-                res.sendStatus(200);
-            })
-            .catch((err) => {
-                console.log(err);
-                res.status(400).json({ message: err.message });
-            })
+        repo_id *= 1;
+
+        if(urids.includes(repo_id)){
+            UserSchema.updateMany(
+                {login:username},
+                {$push:{"star_in_item":repo_id}})
+                .then((result) => {
+                    console.log(result);                
+                    res.sendStatus(200);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    res.status(400).json({ message: err.message });
+                })
+        }else{
+            res.send("not in repo list");
+        }
+
     });
 
-    app.get('/update/checkstarlist/:username/:starcount',function(req,res){
-        let {username, starcount} = req.params;
+    app.get('/update/checkstarlist/:username',function(req,res){
+        let username = req.params.username;
+        var starcount;
         var result = {};
         // MONGODB -> SELECT (username, star_pages) into value (username, star_pages)
-        const go = UserSchema.find()
-            .where('login').in([username])
-            .select('star_pages')
+        fetch(`https://api.github.com/users/${username}/starred`)
+            .then((response) => response.json())
+            .then((posts) => starcount = posts.length)
+            .then(() => UserSchema.find()
+                .where('login').in([username])
+                .select('star_pages'))
             .then((result) => {
                 try{
-                    num = result[0].star_pages;
+                    var num = result[0].star_pages;
                 } catch (err) {
                     res.status(400).json({ message: err.message });
                 }
@@ -64,12 +75,16 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
             })
     });
 
-    app.get('/update/fetchstarlist/:username/:starcount',function(req,res){
-        let {username, starcount} = req.params;
+    app.get('/update/fetchstarlist/:username',function(req,res){
+        let username = req.params.username;
+        var starcount;
 
         fetch(`https://api.github.com/users/${username}/starred`)
             .then((response) => response.json())
-            .then((posts) => get_repo_ids(posts))
+            .then((posts) => {
+                starcount = posts.length;
+                return get_repo_ids(posts);
+            })
             .then((raw_list) => {
                 console.log(raw_list);
                 let filtered_list = raw_list.filter(x => urids.includes(x));
@@ -78,6 +93,7 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
             })
             .then((repo_list) => {
                 try {
+                    console.log(starcount);
                     UserSchema.updateMany({login:username}, 
                         {$set:{ star_in_item:repo_list, star_pages:starcount }})
                       .then((result) => console.log(result))
