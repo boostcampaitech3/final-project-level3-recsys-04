@@ -12,7 +12,8 @@
     "activeTab",
     "webRequest",
     "contextMenus",
-    "cookies"
+    "cookies",
+    "webNavigation"
   ],
   "action": {
     "default_popup": "popup.html",
