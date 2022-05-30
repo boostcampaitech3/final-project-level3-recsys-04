@@ -31,14 +31,21 @@ const RepoCard: React.FC<{
   }, []) // 끝에 배열 -> @param deps — If present, effect will only activate if the values in the list change.
 
   if (!repoData){
-    return <div>no data...</div>
+    return <div onClick={()=>{
+      window.open("http://github.com");
+    }}>no data...</div>
   }
 
   return(
     <div> {repoData.map((repo, index) => (
-        <Card>
+        <Card onClick={()=>{
+          window.open(repo.url);
+        }} >
         <CardContent>
           <Typography variant="h5">{repo.name}</Typography>
+          <Typography variant="h5">{repo.description}</Typography>
+          <Typography variant="h5">{repo.languages}</Typography>
+          <Typography variant="h5">{repo.stars}</Typography>
         </CardContent>
         </Card>
         ))}
