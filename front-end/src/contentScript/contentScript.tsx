@@ -8,7 +8,7 @@ var find = null
 chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
   console.log("메세지 받음!")
   console.log(msg)
-  sendResponse({"received": "true"})
+  sendResponse({"repoid": ""})
   return true
 })
 
