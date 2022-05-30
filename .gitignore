@@ -2,3 +2,9 @@ api/authenticate.json
 dist
 node_modules
 api/node_modules
+api/.env
+noble-velocity-349915-f8beeb8a1f8a.json
+data_dict.pkl
+_pycache_
+.ipynb_checkponts
+.pyc

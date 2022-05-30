@@ -1,42 +1,58 @@
-module.exports = function(app, conn)
+module.exports = function(app, UserSchema, RepoSchema, mongoose)
 {    
-    var fs = require('fs');
-    var url = require('url');
+    const fs = require('fs');
     const fetch = require("node-fetch");
 
-    var result = {};
+    var uid;
+    var urids;
     var repo_list = [];
     
     function get_repo_ids(posts){
+        repo_list = [];
         for (const i in posts){
             repo_list.push(posts[i].id);
         }
         return repo_list
     }
 
-    /*
-    function insert_repo_list(repo_list, conn){
-        conn.query('INSERT INTO user (login, star_page, star_list) VALUE(username, repo_list, repo_list.length)', 
-                    function (err, result) {
-            if (err) {
-              console.log(err);
-            }else {
-              repos["rids"] = result
-              const user_starred_repos = repos;
-            //   res.send(repos);
-            }
-        })
-    } 
-    */ 
-
+    // TODO: get urids from DB
+    fs.readFile(__dirname + "/unique_repos.json", 'utf8', function (err, data) {
+        let jsondata = JSON.parse(data);
+        urids = jsondata.rids;
+    });
+    
     app.get('/init/:username/:starcount',function(req,res){
         let {username, starcount} = req.params;
-        result["username"] = username
 
-        fetch(`https://api.github.com/users/${username}/starred`)
+        fetch(`https://api.github.com/users/${username}`)
             .then((response) => response.json())
-            .then((posts) => get_repo_ids(posts))
-            .then((repo_lists) => res.send(repo_lists)) // TODO: filter and insert user table, repo_user table
-            .catch((error) => console.log("error:", error));
+            .then((data) => {
+                uid = data.id;
+                console.log(uid);
+                return fetch(`https://api.github.com/users/${username}/starred`);
+            })        
+            .then((response) => response.json())
+            .then((posts) => {
+                const repo_lists = get_repo_ids(posts);
+                console.log(repo_lists);
+                // TODO: get urids from DB
+                let filtered_lists = repo_lists.filter(x => urids.includes(x));
+                const InitUser = new UserSchema({
+                    uid: uid,
+                    login: username,
+                    star_pages: starcount,
+                    star_in_item: filtered_lists // repo_lists 
+                });
+                try {
+                    InitUser.save();
+                    res.sendStatus(200);
+                  } catch (err) {
+                    res.status(400).json({ message: err.message });
+                };
+            })
+            .catch((err) => {
+                console.log("error:", err);
+                res.status(400).json({ message: err.message })
+            });
     });
 }
