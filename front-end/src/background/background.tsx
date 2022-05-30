@@ -13,9 +13,19 @@ let starcount=0
 - 팝업같은 익스텐션의 다른 뷰가 runtime.getBackgroundPage한다.
 */
 
+function wait(ms){
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms) {
+    end = new Date().getTime();
+ }
+}
+
 // 설치시 실행되는 함수
 // 로그인 정보 쿠키에 저장해준다.
 chrome.runtime.onInstalled.addListener(() => {
+  console.log("설치되었다!")
+  
   chrome.storage.sync.get(["isLogin, username"], (res)=> {
     isLogin = res.isLogin ?? false
     username = res.username ?? ""
@@ -47,22 +57,31 @@ chrome.runtime.onInstalled.addListener(() => {
             initUser(username, starcount)
             // message passing: contentScript를 통해서 보내준다.
               // contentScript에 메세지 보내주기
-              chrome.tabs.query({
-                active: true,
-                currentWindow: true,
-                },
-                (tabs) => {
-                  if (tabs.length > 0) {
-                    console.log("첫 INstall 메세지 보냄")
-                    chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, (response)=>{
-                      if (chrome.runtime.lastError) {
-                        console.log("메세지 전송 도중 에러 발생")
-                      }
-                      else {
-                        console.log(response)
-                      }
-                      // clickedRepo(username, "")
-                    })
+              chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
+                if (tabs.length > 0) {
+                  console.log("첫 INstall 메세지 보냄")
+
+                  chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, (response)=>{
+                    if (chrome.runtime.lastError) {
+                      wait(2000);
+                      console.log("메세지 전송 도중 에러 발생")
+                      chrome.tabs.create({url: "https://github.com"}, ()=>{
+                        chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
+                          chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, ()=>{
+                            if (chrome.runtime.lastError) {
+                              console.log("메세지 전송 도중 에러 발생 두번째")
+                            } else {
+                              console.log("콜드스타트 핸들링 위해 새 탭 만듦")
+                            }
+                          })
+                        })
+                      })
+                    }
+                    else {
+                      console.log(response)
+                    }
+                    // clickedRepo(username, "")
+                  })
                 }
               })
           })
@@ -78,7 +97,7 @@ function validateGithubView(str){
 }
 
 
-chrome.webNavigation.onBeforeNavigate.addListener((details)=>{
+chrome.webNavigation.onCompleted.addListener((details)=>{
   console.log("-navigation-")
   // github view
   if (validateGithubView(details.url)){

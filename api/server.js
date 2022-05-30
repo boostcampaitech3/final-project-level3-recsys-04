@@ -13,6 +13,8 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const UserSchema = require("./lib/schema_user");
 const RepoSchema = require("./lib/schema_repo");
+const PopSchema = require("./lib/schema_pop");
+const SimSchema = require("./lib/schema_sim");
 mongoose.Promise = global.Promise; // Node 의 네이티브 Promise 사용
 // mongodb 연결
 const conn = mongoose.connect(process.env.MONGO_URI)
@@ -46,7 +48,6 @@ app.use(cors());
 var router = require('./router/main')(app, conn);
 var init = require('./lib/init')(app, UserSchema, RepoSchema, mongoose);
 var update = require('./lib/update')(app, UserSchema, RepoSchema, mongoose); 
-var inference = require('./lib/inference')(app, UserSchema, RepoSchema, mongoose);
-// next cycle
-// var coldstart = require('./lib/coldstart')(app, UserSchema, RepoSchema, mongoose);
+var inference = require('./lib/inference')(app, UserSchema, RepoSchema, PopSchema, SimSchema, mongoose);
+var coldstart = require('./lib/coldstart')(app, UserSchema, RepoSchema, PopSchema, mongoose);
 var clicked = require('./lib/clicked')(app, UserSchema, RepoSchema, mongoose);
