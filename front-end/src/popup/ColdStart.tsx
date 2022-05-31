@@ -45,16 +45,16 @@ const ColdStartCards: React.FC<{}> = ({}) => {
 
   return(
     <div> 
+      <h1> ColdStart! </h1>
     {
       category_m1.map((repo, index) => (
         <Card onClick={()=>{
           window.open(repoToURL(repo));
         }} >
         <CardContent>
-          <Typography variant="h5">{repo.repo_name}</Typography>
-          {/* <Typography variant="h5">{repo.description}</Typography>
-          <Typography variant="h5">{repo.languages}</Typography> */}
-          <Typography variant="h5">{repo.stars}</Typography>
+          <Typography variant="subtitle1">{repo.repo_name}</Typography>
+          <Typography variant="body2">{"🦚" + repo.category.category_L + ">" + repo.category.category_M + ">" + repo.category.category_S}</Typography>
+          <Typography variant="body2">{"⭐️ " + repo.stars}</Typography>
         </CardContent>
         </Card>
       ))
