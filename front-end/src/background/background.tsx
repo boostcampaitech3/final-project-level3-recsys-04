@@ -63,18 +63,40 @@ chrome.runtime.onInstalled.addListener(() => {
 
                   chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, (response)=>{
                     if (chrome.runtime.lastError) {
-                      wait(2000);
+                      console.log(chrome.runtime.lastError.message)
+
                       console.log("메세지 전송 도중 에러 발생")
-                      chrome.tabs.create({url: "https://github.com"}, ()=>{
-                        chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
-                          chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, ()=>{
-                            if (chrome.runtime.lastError) {
-                              console.log("메세지 전송 도중 에러 발생 두번째")
-                            } else {
-                              console.log("콜드스타트 핸들링 위해 새 탭 만듦")
-                            }
+
+                      
+                      chrome.tabs.create({url: "https://github.com"}, (tab)=>{
+                        // 다 만들어 질  때까지 기다리기.
+                        
+                        // 선언
+                        var onready = function() {
+                          onready = function() {}; // Run once.
+                          chrome.tabs.onUpdated.removeListener(listener);
+                          // Now the tab is ready!
+                            
+                          chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
+                            chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, ()=>{
+                              if (chrome.runtime.lastError) {
+                                console.log(chrome.runtime.lastError.message) // A listener indicated an asynchronous response by returning true, but the message channel closed before a response was received
+                                console.log("메세지 전송 도중 에러 발생 두번째")
+                              } else {
+                                console.log("콜드스타트 핸들링 위해 새 탭 만듦")
+                              }
+                            })
                           })
-                        })
+                        };
+                  
+                        function listener(tabId, changeInfo) {
+                          if (tabId === tab.id && changeInfo.status == 'complete') {
+                              onready();
+                          }
+                        }
+                        
+                        // 호출
+                        chrome.tabs.onUpdated.addListener(listener);
                       })
                     }
                     else {
