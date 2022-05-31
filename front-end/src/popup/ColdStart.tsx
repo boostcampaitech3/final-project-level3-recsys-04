@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom';
-import { Repo, RepoList, inference, coldstart } from '../utils/api'
+import { Repo, RepoList, inference, coldstart, repoToURL } from '../utils/api'
 
 import {
   Box,
@@ -10,40 +10,56 @@ import {
   CardContent,
   Grid,
   Typography,
+  Pagination,
+  PaginationItem
 } from '@mui/material'
 
 const ColdStartCards: React.FC<{}> = ({}) => {
   // 뷰 안에서 data를 track 하기 위해서
-  const [repoData, setRepoData] = useState<Repo[]|null>(null)
-  
+  const [category_m1, set_category_m1] = useState<Repo[]|null>(null)
+  const [category_m2, set_category_m2] = useState<Repo[]|null>(null)
+  const [category_m3, set_category_m3] = useState<Repo[]|null>(null)
+  const [category_m4, set_category_m4] = useState<Repo[]|null>(null)
+  const [category_m5, set_category_m5] = useState<Repo[]|null>(null)
+  const [page_num, set_page_num] = useState<number|0>(0)
+
   // API 호출해주기
   useEffect(()=> {
+    console.log("useEffect 나타남22")
     coldstart()
       .then((data)=> {
         console.log(data)
-        setRepoData(data)
+        set_category_m1(data.category_m1)
+        set_category_m2(data.category_m2)
+        set_category_m3(data.category_m3)
+        set_category_m4(data.category_m4)
+        set_category_m5(data.category_m5)
       })
       .catch(err => console.log(err))
   }, []) // 끝에 배열 -> @param deps — If present, effect will only activate if the values in the list change.
 
-  if (!repoData){
+  if (!category_m1){
     return <div onClick={()=>{
     }}>no cold start data received...</div>
   }
 
   return(
-    <div> {repoData.map((repo, index) => (
+    <div> 
+    {
+      category_m1.map((repo, index) => (
         <Card onClick={()=>{
-          window.open(repo.url);
+          window.open(repoToURL(repo));
         }} >
         <CardContent>
-          <Typography variant="h5">{repo.name}</Typography>
-          <Typography variant="h5">{repo.description}</Typography>
-          <Typography variant="h5">{repo.languages}</Typography>
+          <Typography variant="h5">{repo.repo_name}</Typography>
+          {/* <Typography variant="h5">{repo.description}</Typography>
+          <Typography variant="h5">{repo.languages}</Typography> */}
           <Typography variant="h5">{repo.stars}</Typography>
         </CardContent>
         </Card>
-        ))}
+      ))
+    }
+    <Pagination count={6} page={page_num}/>
     </div>
   )
 }
