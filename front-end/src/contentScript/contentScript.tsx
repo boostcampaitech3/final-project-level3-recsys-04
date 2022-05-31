@@ -29,6 +29,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
       )
     }
     ReactDOM.render(<App />, coldStartView)
+    sendResponse({"":""}) // null로 했더니 문제 생겨서 바꿈.
     return true
   }
   if ("username" in msg){ // 추천을 해줘야 함
@@ -36,7 +37,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
     sendResponse({"repoid": repoidtag.content})
     return true
   }
-  return true
 })
 
 // 깃헙 레포이다 -> 추천해주기
