@@ -89,7 +89,7 @@ class User_json(BaseModel):
 def infer_repo(user_json:User_json):
     #user_json -> user_list
     user_list = list(map(int,user_json.rids ))
-
+    user_list = set(user_list) & set(unique_sid)
     #user_list -> user_vector
     user_vector = list(map(sid2id, user_list))
     n_users = 1
