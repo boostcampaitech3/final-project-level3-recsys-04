@@ -1,11 +1,11 @@
 const baseURL = 'https://127.0.0.1:3001'
 export interface Repo {
-  name: string,
-  // login: string
+  repo_name: string,
+  login: string
   stars: number,
-  languages: string,
-  description: string,
-  url: string
+  // languages: string,
+  // description: string,
+  // url: string  
 }
 export interface RepoList {
   repoList: Repo[]
@@ -30,21 +30,16 @@ export async function initUser(username: string, starcount: number) : Promise<an
 }
 // coldstart(설치시)
 export async function coldstart() : Promise<any> {
-  fetch(`${baseURL}/coldstart`)
-  .then(res => {
-    //fetch를 통해 받아온 res객체 안에
-    //ok 프로퍼티가 있음
-      if (!res.ok) {
-        throw Error("could not fetch the data that resource");
-      }
-      return res.json();
-    })
-    .catch(err => {
-      console.log(err)
-    //에러시 Loading메세지 사라지고
-    //에러메세지만 보이도록 설정
-    });
-}
+  const res = await fetch(`${baseURL}/coldstart`)
+	// 404 처리하기
+	if (!res.ok) {
+    // return ar
+		throw new Error('Repo not found')
+	}
+	const data = await res.json()
+  console.log("data받음")
+	return data // JSON 데이터
+  }
 
 // 레포지토리를 구경할 때
 export async function clickedRepo(username: string, repoId:string) : Promise<any> {
@@ -91,9 +86,9 @@ export async function fetchStarList(username: string, starcount:number) : Promis
 }
 
 // 추천 결과 받아오기
-export async function inference(username: string) : Promise<any> {
-  console.log(`${baseURL}/inference/starred/repo/${username}`)
-  const res = await fetch(`${baseURL}/inference/starred/repo/${username}`)
+export async function inference(username: string, repoId: number) : Promise<any> {
+  console.log(`${baseURL}/inference/starred/repo/${username}/${repoId}`)
+  const res = await fetch(`${baseURL}/inference/starred/repo/${username}/${repoId}`)
 	// 404 처리하기
 	if (!res.ok) {
     // return ar
@@ -119,4 +114,7 @@ function makeBody(body={}) {
     referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     body: JSON.stringify(body), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
   } as RequestInit
+}
+export function repoToURL(repo: Repo){
+  return "https://github.com/" + repo.login + "/" + repo.repo_name 
 }
