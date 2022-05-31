@@ -1,7 +1,9 @@
 import React, {useEffect} from 'react'
 import {inference} from '../utils/api'
 import ReactDOM from 'react-dom'
+
 import RepoCard from '../popup/RepoCard'
+import ColdStartCards from '../popup/ColdStart'
 
 var find = null
 var username = null
@@ -24,7 +26,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
     const App: React.FC<{}> = () => {
       return (
         <div>
-          <RepoCard username='jonyejin'></RepoCard>
+          <ColdStartCards></ColdStartCards>
         </div>
       )
     }

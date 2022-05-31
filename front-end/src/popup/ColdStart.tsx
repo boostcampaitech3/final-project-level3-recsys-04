@@ -12,17 +12,13 @@ import {
   Typography,
 } from '@mui/material'
 
-// WIP: Container와 Card?
-const RepoCard: React.FC<{
-  username: string
-}> = ({ username }) => {
+const ColdStartCards: React.FC<{}> = ({}) => {
   // 뷰 안에서 data를 track 하기 위해서
   const [repoData, setRepoData] = useState<Repo[]|null>(null)
   
   // API 호출해주기
   useEffect(()=> {
-    console.log("useEffect 나타남")
-    inference(username)
+    coldstart()
       .then((data)=> {
         console.log(data)
         setRepoData(data)
@@ -32,8 +28,7 @@ const RepoCard: React.FC<{
 
   if (!repoData){
     return <div onClick={()=>{
-      window.open("http://github.com");
-    }}>no data...</div>
+    }}>no cold start data received...</div>
   }
 
   return(
@@ -52,5 +47,4 @@ const RepoCard: React.FC<{
     </div>
   )
 }
-
-export default RepoCard
+export default ColdStartCards
