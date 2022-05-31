@@ -41,7 +41,6 @@ module.exports = function(app, UserSchema, RepoSchema, PopSchema, SimSchema, mon
             if (user_repos > 4){
                 function getBody(){
                     return new Promise(function (resolve, reject){
-                        let user_repos = [132704094,132750381,132772075,132905880,133092972,133256759,133376841,133411657];
                         const options = {
                             uri:'http://localhost:30001/model',  //  http://0.0.0.0:8090/model
                             method: 'POST',
