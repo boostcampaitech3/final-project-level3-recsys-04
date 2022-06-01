@@ -63,7 +63,7 @@ if __name__ == '__main__':
     print("Get repository data")
     db = db_connect(**db_profile)
     collection = db.get_collection("repository")
-    repo_list = collection.find()
+    repo_list = collection.find({"star_user_list":{"$exists":False}})
 
     url_list = []
 
@@ -107,6 +107,7 @@ if __name__ == '__main__':
                 insert_data = json.dumps(data_dict)
                 uid_list.append(user["id"])
                 q.put(insert_data)
+                print(f"{insert_data} - insert time: {datetime.now()}")
 
             url_idx += 1
         except requests.exceptions.HTTPError as httperr:
