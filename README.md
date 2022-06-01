@@ -1,3 +1,9 @@
+<style>
+  table img {
+    max-height
+  }
+</style>
+
 # 💻 Github You may also Like
 
 ## Contents
@@ -16,13 +22,70 @@
 
 ## 👩🏻‍💻👨🏻‍💻 Members
 
-|박기범|정인식|조영하|조예진|최필규|
-|:---:|:---:|:---:|:---:|:---:|
-|![Avatar](https://avatars.githubusercontent.com/u/61653740?v=4)|![Avatar](https://avatars.githubusercontent.com/u/78129508?v=4)|![Avatar](https://avatars.githubusercontent.com/u/67923359?v=4)|![Avatar](https://raw.githubusercontent.com/Do-Not-12/peer-session/main/images/lexa.png)|![Avatar](https://avatars.githubusercontent.com/u/79245575?v=4)|
-|폴라|선비|코그|렉사|필|
-|`Data Engineer`|`Data Scientist`|`Back-End Developer`|`Front-End Developer`|`Data Scientist`|
-|[Github](https://github.com/cow-coding)|[Github](#)|[Github](#)|[Github](#)|[Github](#)|
-|`데이터ETL` `배치학습` `DBA`|||||
+<table align="center">
+    <tr>
+        <td align="center">박기범</td>
+        <td align="center">정인식</td>
+        <td align="center">조영하</td>
+        <td align="center">조예진</td>
+        <td align="center">최필규</td>
+    </tr>
+    <tr height="160px">
+        <td align="center">
+            <img height="120px" weight="120px" src="https://avatars.githubusercontent.com/u/61653740?v=4"/>
+        </td>
+        <td align="center">
+            <img height="120px" weight="120px" src="https://avatars.githubusercontent.com/u/78129508?v=4"/>
+        </td>
+        <td align="center">
+            <img height="120px" weight="120px" src="https://avatars.githubusercontent.com/u/67923359?v=4"/>
+        </td>
+        <td align="center">
+            <img height="120px" weight="120px" src="https://avatars.githubusercontent.com/u/77298353?v=4"/>
+        </td>
+        <td align="center">
+            <img height="120px" weight="120px" src="https://avatars.githubusercontent.com/u/79245575?v=4"/>
+        </td>
+    </tr>
+        <td align="center">폴라</td>
+        <td align="center">선비</td>
+        <td align="center">코그</td>
+        <td align="center">렉사</td>
+        <td align="center">필</td>
+    <tr>
+    </tr>
+    <tr>
+        <td align="center"><code>Data Enigneer</code></td>
+        <td align="center"><code>Data Scientist</code></td>
+        <td align="center"><code>Back-End Engineer</code></td>
+        <td align="center"><code>Front-End Engineer</code></td>
+        <td align="center"><code>Data Scientist</code></td>
+    </tr>
+    <tr>
+        <td align="center"><a href="https://github.com/cow-coding">Github</a></td>
+        <td align="center"><a href="#">Github</a></td>
+        <td align="center"><a href="#">Github</a></td>
+        <td align="center"><a href="#">Github</a></td>
+        <td align="center"><a href="#">Github</a></td>
+    </tr>
+    <tr>
+        <td align="center">
+          <code>데이터ETL</code> <code>배치학습</code> <code>DBA</code>
+        </td>
+        <td align="center">
+          <code>태그1</code>
+        </td>
+        <td align="center">
+          <code>태그1</code>
+        </td>
+        <td align="center">
+          <code>태그1</code>
+        </td>
+        <td align="center">
+          <code>태그1</code>
+        </td>
+    </tr>
+</table>
 
 ## Demo
 
