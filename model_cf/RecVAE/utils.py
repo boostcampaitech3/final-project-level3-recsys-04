@@ -112,3 +112,14 @@ def recall(X_pred, heldout_batch, k=100):
         np.float32)
     recall = tmp / np.minimum(k, X_true_binary.sum(axis=1))
     return recall
+
+def hit_K(X_pred, heldout_batch, k=100):
+    batch_users = X_pred.shape[0]
+
+    idx = bn.argpartition(-X_pred, k, axis=1)
+    X_pred_binary = np.zeros_like(X_pred, dtype=bool)
+    X_pred_binary[np.arange(batch_users)[:, np.newaxis], idx[:, :k]] = True
+
+    X_true_binary = (heldout_batch > 0).toarray()
+    hit_k = np.max((np.logical_and(X_true_binary, X_pred_binary)), axis=1)
+    return hit_k
