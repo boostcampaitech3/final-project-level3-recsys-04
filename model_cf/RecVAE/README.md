@@ -1,6 +1,5 @@
 # RecVAE
 
-#### /opt/ml/project/RecVAE 가 원래 프로젝트 경로입니다. 절대경로로 된것들이 많아서 경로들을 수정해주지 않으면 실행시 오류가 생깁니다.
 #### 먼저 python preprocessing.py --dataset(train_ratings.csv path) --output_dir(전처리파일들 저장할 곳) 하셔서 전처리 진행하시고
 #### python run.py --dataset(전처리 파일들 저장한 곳) 하시고 기타 설정은 입맞에 맞게 바꿔주시면 됩니다(모델, 제출파일 이름은 --save 등등...)
 #### run.py 실행시키실 때 --train True --infrenece True 하시면 훈련부터 제출파일 저장까지 한 번에 되고 하나씩 하고 싶으실 때는 원하시는 인자만 True로 주시면 됩니다.

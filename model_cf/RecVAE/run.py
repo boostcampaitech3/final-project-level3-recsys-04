@@ -11,7 +11,7 @@ from scipy import sparse
 from tqdm import tqdm
 import ast
 
-from utils import get_data, ndcg, recall
+from utils import get_data, hit_K, ndcg, recall
 from model import VAE
 
 from inference import inference
@@ -21,7 +21,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='/opt/ml/project/RecVAE/data')
 parser.add_argument('--hidden-dim', type=int, default=400)
 parser.add_argument('--latent-dim', type=int, default=200)
-parser.add_argument('--batch-size', type=int, default=512)
+parser.add_argument('--batch-size', type=int, default=256)
 parser.add_argument('--beta', type=float, default=None)
 parser.add_argument('--gamma', type=float, default=0.005)
 parser.add_argument('--lr', type=float, default=5e-4)
@@ -31,7 +31,7 @@ parser.add_argument('--n-dec_epochs', type=int, default=1)
 parser.add_argument('--not-alternating', type=bool, default=False)
 parser.add_argument('--save', type=str, default='all_recomend')
 parser.add_argument('--train', type=bool, default=True)
-parser.add_argument('--inference', type=bool, default=True)
+parser.add_argument('--inference', type=bool, default=False)
 args = parser.parse_args()
 
 seed = 0
@@ -141,7 +141,7 @@ model_kwargs = {
     'latent_dim': args.latent_dim,
     'input_dim': train_data.shape[1]
 }
-metrics = [{'metric': ndcg, 'k': 100}]
+metrics = [{'metric': hit_K, 'k': 10}]
 
 best_ndcg = -np.inf
 train_scores, valid_scores = [], []
@@ -185,13 +185,13 @@ if args.train:
             model_best.load_state_dict(deepcopy(model.state_dict()))
             
 
-        print(f'epoch {epoch} | valid ndcg@100: {valid_scores[-1]:.4f} | ' +
-            f'best valid: {best_ndcg:.4f} | train ndcg@100: {train_scores[-1]:.4f}')
+        print(f'epoch {epoch} | valid recall@10: {valid_scores[-1]:.4f} | ' +
+            f'best valid: {best_ndcg:.4f} | train recall@10: {train_scores[-1]:.4f}')
         # print(f'epoch {epoch} | train ndcg@100: {train_scores[-1]:.4f}')
 
 
         
-    test_metrics = [{'metric': ndcg, 'k': 100}, {'metric': recall, 'k': 20}, {'metric': recall, 'k': 50}]
+    test_metrics = [{'metric': ndcg, 'k': 10}, {'metric': recall, 'k': 10}, {'metric': hit_K, 'k': 10}]
 
     final_scores = evaluate(model_best, test_in_data, test_out_data, test_metrics)
 

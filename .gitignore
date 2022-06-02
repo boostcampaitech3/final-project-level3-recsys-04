@@ -7,4 +7,5 @@ noble-velocity-349915-f8beeb8a1f8a.json
 data_dict.pkl
 _pycache_
 .ipynb_checkponts
-.pyc
+*.pyc
+__pycache__/

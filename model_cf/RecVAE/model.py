@@ -109,7 +109,7 @@ class VAE(nn.Module):
             
             alpha = 1
             MSE_Loss = torch.nn.MSELoss(size_average=False)
-            # mll = -MSE_Loss(x_pred,user_ratings)*alpha
+            #mll = -MSE_Loss(x_pred,user_ratings)*alpha
             mll = (F.log_softmax(x_pred, dim=-1) * user_ratings).sum(dim=-1).mean()
             kld = (log_norm_pdf(z, mu, logvar) - self.prior(user_ratings, z)).sum(dim=-1).mul(kl_weight).mean()
             negative_elbo = -(mll - kld)

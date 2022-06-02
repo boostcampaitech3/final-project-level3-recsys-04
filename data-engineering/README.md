@@ -5,6 +5,10 @@
 ```
 .
 ├── README.md
+├── batch-dag
+│   ├── README.md
+│   ├── batch_train.py
+│   └── requirements.txt
 ├── data-pipe-line
 │   ├── README.md
 │   ├── consumer.py
@@ -15,6 +19,11 @@
 │   └── requirements.txt
 └── user_star_in_item.py
 ```
+
+## `batch-dag`
+
+- This directory is about batch training pipeline dag
+- DAG based on [Airflow](https://github.com/apache/airflow)
 
 ## `data-pipe-line`
 
