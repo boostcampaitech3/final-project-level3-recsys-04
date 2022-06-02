@@ -45,9 +45,6 @@ chrome.runtime.onInstalled.addListener(() => {
             username = x.value
             // 저장하기
             chrome.storage.sync.set({"isLogin": true, "username": username})
-            initUser(username).then(()=>{
-              console.log("inituser완료")
-            })
             // message passing: contentScript를 통해서 보내준다.
               // contentScript에 메세지 보내주기
               chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
@@ -125,15 +122,7 @@ chrome.webNavigation.onCompleted.addListener((details)=>{
       (tabs) => {
         if (tabs.length > 0) {
           chrome.tabs.sendMessage(tabs[0].id, {"username": username}, (response)=>{
-            console.log(response) // 형식: { "repoid": int }
-            if ((response.repoid != null) && (username != "") && (username != null)){
-              repoid = Number(response.repoid)
-              clickedRepo(username, repoid)
-              console.log("clickedRepo함")
-            } else {
-              console.log("clickedRepo: username없어서 못함")
-              console.log(username)
-            }
+            // 원래 여기 callback에서 API호출 하려다가, CSP문제로 삭제.
           })
         }
       }

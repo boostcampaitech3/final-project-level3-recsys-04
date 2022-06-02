@@ -19,6 +19,7 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
   console.log("메세지 받음!")
   console.log(msg)
   if ("coldstart" in msg){
+
     // Render Coldstart view in main github page
     var coldStartView = document.createElement("div");
     var coldStartPlace = document.querySelector(".d-block.Link--secondary.no-underline.f6.mb-3")
@@ -45,11 +46,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
       
       var myBody = document.createElement("div");
       repoidtag.insertBefore(myBody, null)
-      var MyEmptyView: React.FC<{}> = (username, repoid) => {
-        return (
-              <EmptyView></EmptyView>
-        )}
-      ReactDOM.render(<MyEmptyView />, myBody)
+   
+      ReactDOM.render(<EmptyView
+        username={username}
+        repoid={repoid}
+        ></EmptyView>, myBody)
     }
     return true
   }

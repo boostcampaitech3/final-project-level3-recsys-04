@@ -18,9 +18,18 @@ const ColdStartCards: React.FC<{}> = ({}) => {
   // 뷰 안에서 data를 track 하기 위해서
   const [category_m1, set_category_m1] = useState<Repo[][]|null>(null)
   var [page_num, set_page_num] = useState<number|0>(0)
-
+  var username=null
   // API 호출해주기
   useEffect(()=> {
+    chrome.storage.sync.get(["username"], (res)=> {
+      username = res.username
+      if (username != null){
+        initUser(username).then(()=>{
+          console.log("inituser완료")
+        })
+      }
+    })
+
     console.log("useEffect 나타남22")
     coldstart()
       .then((data)=> {
