@@ -33,10 +33,12 @@ const options = { key: fs.readFileSync('rootca.key'), cert: fs.readFileSync('roo
 
 // Create an HTTP server. 
 http.createServer(app).listen(3000, function(){
-    console.log("Express server has started on port http://127.0.0.1:3000")
+    console.log("Express server has started on port http://127.0.0.1:3000 ")
 });
 // Create an HTTPS server. 
-https.createServer(options, app).listen(3001);
+https.createServer(options, app).listen(3001, function(){
+    console.log("Express server has started on port https://localhost:3001 ")
+})
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
