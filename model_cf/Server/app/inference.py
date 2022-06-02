@@ -3,7 +3,6 @@ import torch
 from scipy import sparse
 import pandas as pd
 import numpy as np
-import bottleneck as bn
 from tqdm import tqdm
 import ast
 

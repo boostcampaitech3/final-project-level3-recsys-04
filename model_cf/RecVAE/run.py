@@ -141,7 +141,7 @@ model_kwargs = {
     'latent_dim': args.latent_dim,
     'input_dim': train_data.shape[1]
 }
-metrics = [{'metric': hit_K, 'k': 10}]
+metrics = [{'metric': recall, 'k': 10}]
 
 best_ndcg = -np.inf
 train_scores, valid_scores = [], []
