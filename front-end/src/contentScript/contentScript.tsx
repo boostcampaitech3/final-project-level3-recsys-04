@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react'
 import {starClick} from '../utils/api'
 import ReactDOM from 'react-dom'
-
 import RepoCard from '../popup/RepoCard'
 import ColdStartCards from '../popup/ColdStart'
+import EmptyView  from '../popup/EmptyView'
 
 var find = null
 var username = null
@@ -35,12 +35,21 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
     sendResponse({"":""}) // null로 했더니 문제 생겨서 바꿈.
     return true
   }
-  if ("username" in msg){ // 추천을 해줘야 함
+  if ("username" in msg){ // 네비게이션 디텍팅 해서 받음.
     var repoidtag = document.querySelector('meta[name="octolytics-dimension-repository_id"]')  as HTMLMetaElement
     repoid = repoidtag.content
     
     if (repoid != null && repoid != ""){
       sendResponse({"repoid": repoidtag.content})
+      // WIP: 여기서 API 호출을 해보자.
+      
+      var myBody = document.createElement("div");
+      repoidtag.insertBefore(myBody, null)
+      var MyEmptyView: React.FC<{}> = (username, repoid) => {
+        return (
+              <EmptyView></EmptyView>
+        )}
+      ReactDOM.render(<MyEmptyView />, myBody)
     }
     return true
   }
@@ -86,7 +95,7 @@ var star = document.querySelector(".js-toggler-target.rounded-left-2.btn-sm.btn.
 if (star!=null){
   star.addEventListener('click', function(){
     console.log("스타 클릭!")
-    starClick(username, repoid)
+    // TODO: 스타 여부 보내기.
   })  // 이거 코드는 정상 동작 하고 있음.
 }
 

@@ -15,25 +15,27 @@ export interface RepoList {
   repoList: Repo[]
 }
 
+export interface Infos {
+  username: string
+  repoId: number
+}
+
 // 최초 repository init시
 export async function initUser(username: string) : Promise<any> {
-  fetch(`${baseURL}/init/${username}`)
-  .then(res => {
-    //fetch를 통해 받아온 res객체 안에
-    //ok 프로퍼티가 있음
-      if (!res.ok) {
-        throw Error("could not fetch the data that resource");
-      }
-      return null
-    })
-    .catch(err => {
-      console.log(err)
-    //에러시 Loading메세지 사라지고
-    //에러메세지만 보이도록 설정
-    });
+  console.log(`${baseURL}/init/${username}`)
+  const res = await fetch(`${baseURL}/init/${username}`)
+  // 404 처리하기
+  if (!res.ok) {
+    // return ar
+    throw new Error('Inituser 실패')
+  }
+  const data = await res.json()
+  return null // JSON 데이터
 }
+
 // coldstart(설치시)
 export async function coldstart() : Promise<any> {
+  console.log(`${baseURL}/coldstart`)
   const res = await fetch(`${baseURL}/coldstart`)
 	// 404 처리하기
 	if (!res.ok) {
@@ -47,44 +49,29 @@ export async function coldstart() : Promise<any> {
 
 // 레포지토리를 구경할 때
 export async function clickedRepo(username: string, repoId:number) : Promise<any> {
-  console.log( JSON.stringify({username: username, repoId: repoId}))
-  const res = await fetch(`${baseURL}/clicked/repo`, {
-    // Adding method type
-    method: "POST",
-    // Adding body or contents to send
-    body: JSON.stringify({username: username, repoId: repoId}),
-    // Adding headers to the request
-    headers: {
-        "Content-type": "application/json; charset=UTF-8"
-    }
-}
-  
-  
-  )
+  console.log(`${baseURL}/clicked/repo/${username}/${repoId}`)
+  const res = await fetch(`${baseURL}/clicked/repo/${username}/${repoId}`)
 	// 404 처리하기
 	if (!res.ok) {
     // return ar
 		throw new Error('Repo not found')
 	}
-  else {
-    console.log("clickedRepo 완료")
-  }
+  const data = await res.json()
+	return null // JSON 데이터
 }
 
 // github repo에 star을 한다
 export async function starClick(username: string, repoId:string) : Promise<any> {
-  fetch(`${baseURL}/update/starred/repo/${username}/${repoId}`)
-  .then(res => {
-    //fetch를 통해 받아온 res객체 안에
-    //ok 프로퍼티가 있음
-      if (!res.ok) {
-        throw Error("could not fetch the data that resource");
-      }
-      return null
-    })
-    .catch(err => {
-      console.log(err)
-    });
+  console.log(`${baseURL}/update/starred/repo/${username}/${repoId}`)
+
+  const res = await fetch(`${baseURL}/update/starred/repo/${username}/${repoId}`)
+	// 404 처리하기
+	if (!res.ok) {
+    // return ar
+		throw new Error('Repo not found')
+	}
+  const data = await res.json()
+	return null // JSON 데이터
 }
 
 // star 목록의 변동을 확인
@@ -109,22 +96,6 @@ export async function inference(username: string, repoId: number) : Promise<any>
 	return data // JSON 데이터
 }
 
-
-function makeBody(body={}) {
-  return {
-    method: 'POST', // *GET, POST, PUT, DELETE 등
-    mode: 'cors', // no-cors, *cors, same-origin
-    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-    credentials: 'same-origin', // include, *same-origin, omit
-    headers: {
-      'Content-Type': 'application/json',
-      // 'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    redirect: 'follow', // manual, *follow, error
-    referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
-    body: JSON.stringify(body), // body의 데이터 유형은 반드시 "Content-Type" 헤더와 일치해야 함
-  } as RequestInit
-}
 export function repoToURL(repo: Repo){
   return "https://github.com/" + repo.login + "/" + repo.repo_name 
 }

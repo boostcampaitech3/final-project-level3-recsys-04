@@ -6,7 +6,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "host_permissions": [ "<all_urls>"],
+  "host_permissions": [ "<all_urls>", "https://*/*"],
   "permissions": [
     "storage",
     "activeTab",
@@ -38,5 +38,14 @@
 	    "exclude_matches": [],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "content_security_policy": {
+    "sandbox": "sandbox allow-scripts; script-src 'self' https://example.com"
+  },
+  "sandbox": {
+    "pages": [
+      "page1.html",
+      "directory/page2.html"
+    ]
+  }
 }

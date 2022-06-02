@@ -3,7 +3,6 @@ import { Repo, RepoList, initUser, coldstart, clickedRepo } from '../utils/api'
 let isLogin = false
 var username = null
 var repoid = null
-let starcount=0
 
 /*
 호출 타이밍
@@ -46,14 +45,14 @@ chrome.runtime.onInstalled.addListener(() => {
             username = x.value
             // 저장하기
             chrome.storage.sync.set({"isLogin": true, "username": username})
-            
-            initUser(username)
-            console.log("==api) inituser 완료")
+            initUser(username).then(()=>{
+              console.log("inituser완료")
+            })
             // message passing: contentScript를 통해서 보내준다.
               // contentScript에 메세지 보내주기
               chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
                 if (tabs.length > 0) {
-                  console.log("첫 INstall 메세지 보냄")
+                  console.log("첫 Install 메세지 보냄")
 
                   chrome.tabs.sendMessage(tabs[0].id, {"coldstart": "true"}, (response)=>{
                     if (chrome.runtime.lastError) {
@@ -127,11 +126,13 @@ chrome.webNavigation.onCompleted.addListener((details)=>{
         if (tabs.length > 0) {
           chrome.tabs.sendMessage(tabs[0].id, {"username": username}, (response)=>{
             console.log(response) // 형식: { "repoid": int }
-            repoid = Number(response.repoid)
-
-            if (repoid != null && username != "" && username != null){
+            if ((response.repoid != null) && (username != "") && (username != null)){
+              repoid = Number(response.repoid)
               clickedRepo(username, repoid)
-              console.log("==api) clickedRepo 완료: " + {username} + " "+ {repoid})
+              console.log("clickedRepo함")
+            } else {
+              console.log("clickedRepo: username없어서 못함")
+              console.log(username)
             }
           })
         }
