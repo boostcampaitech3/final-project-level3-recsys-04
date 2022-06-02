@@ -20,19 +20,12 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
         urids = jsondata.rids;
     });
     
-    // TODO: GIVE CLICKED REPO ID TO MODEL API
-    app.post('/clicked/repo',function(req,res){
+    app.get('/clicked/repo/:username/:repoId',function(req,res){
         var result = {};
+        let username = req.params.username; 
+        let repoId = req.params.repoId;
+        repoId *= 1;
         
-        // CHECK REQ VALIDITY
-        if(!req.body["username"] || !req.body["repoId"]){
-            result["success"] = 0;
-            result["error"] = "invalid request";
-            res.status(400).json(result);
-            return;
-        }
-
-        let {username, repoId} = req.body;
         console.log(username, repoId);
 
         if(urids.includes(repoId)){
@@ -48,7 +41,7 @@ module.exports = function(app, UserSchema, RepoSchema, mongoose)
                     res.status(400).json({ message: err.message });
             })
         }else{
-            res.status(200).json({ message: 'not in repo list'});
+            res.status(200).json({ message: 'not in repo list' });
         }
     });
 }
