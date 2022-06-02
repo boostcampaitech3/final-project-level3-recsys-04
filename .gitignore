@@ -8,4 +8,5 @@ data_dict.pkl
 _pycache_
 .ipynb_checkponts
 *.pyc
+data-engineering/batch-dag/recvae/.env
 __pycache__/
