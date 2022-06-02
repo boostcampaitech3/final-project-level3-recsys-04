@@ -1,4 +1,4 @@
-module.exports = function(app, UserSchema, RepoSchema, mongoose)
+module.exports = function(app, UserSchema, RepoSchema, mongoose, my_token)
 {    
     var fs = require('fs');
     var url = require('url');

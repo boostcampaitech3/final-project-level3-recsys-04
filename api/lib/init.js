@@ -1,4 +1,4 @@
-module.exports = function(app, UserSchema, RepoSchema, mongoose)
+module.exports = function(app, UserSchema, RepoSchema, mongoose, my_token)
 {    
     const fs = require('fs');
     const fetch = require("node-fetch");

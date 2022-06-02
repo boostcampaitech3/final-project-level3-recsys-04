@@ -9,7 +9,7 @@ module.exports = function(app, UserSchema, RepoSchema, PopSchema, SimSchema, mon
         urids = jsondata.rids;
     });
     
-    app.get('/inference/indevelop/starred/repo/:username/:rid',function(req,res){
+    app.get('/inference/starred/repo/:username/:rid',function(req,res){
         let username = req.params.username;
         let current_repo = req.params.rid;
         current_repo *= 1;
