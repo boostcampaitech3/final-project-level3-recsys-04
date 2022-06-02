@@ -152,7 +152,7 @@ with DAG(
     dag_id="batch_train_recvae",
     description="RecVAE batch train dag",
     start_date=days_ago(2),
-    schedule_interval=None,
+    schedule_interval='* */2 * * * *',
     tags=["recsys", "recvae"]
 ) as dag:
     
