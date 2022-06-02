@@ -37,4 +37,48 @@ module.exports = function(app, UserSchema, RepoSchema, PopSchema, conn)
         }
         run();
     });
+    
+    app.get('/coldstart/ver2', function(req, res){
+        results = {}
+        async function run(){
+            var Repos1 = await RepoSchema.find()
+                .where('category.category_M').equals("Vue.js")
+                .limit(5)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            results["category_m1"] = Repos1;
+            var Repos2 = await RepoSchema.find()
+                .where('category.category_M').equals("Node.js")
+                .limit(5)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            results["category_m2"] = Repos2;
+            var Repos3 = await RepoSchema.find()
+                .where('category.category_M').equals("React")
+                .limit(5)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            results["category_m3"] = Repos3;
+            var Repos4 = await RepoSchema.find()
+                .where('category.category_M').equals("Electron")
+                .limit(5)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            results["category_m4"] = Repos4;
+            var Repos5 = await RepoSchema.find()
+                .where('category.category_M').equals("Deno")
+                .limit(5)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            results["category_m5"] = Repos5;
+            var Repos6 = await RepoSchema.find()
+                .where('category.category_M').equals("Angluar")
+                .limit(5)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            results["category_m6"] = Repos6;
+            res.json(results);
+        }
+        run();
+    });
 }
