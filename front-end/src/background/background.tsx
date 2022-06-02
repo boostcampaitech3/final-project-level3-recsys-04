@@ -1,7 +1,8 @@
 import { Repo, RepoList, initUser, coldstart, clickedRepo } from '../utils/api'
 
 let isLogin = false
-let username=""
+var username = null
+var repoid = null
 let starcount=0
 
 /*
@@ -12,14 +13,6 @@ let starcount=0
 - content script나 다른 extension이 메세지 보냄(Message Passing: `chrome.runtime.sendMessage`)
 - 팝업같은 익스텐션의 다른 뷰가 runtime.getBackgroundPage한다.
 */
-
-function wait(ms){
-  var start = new Date().getTime();
-  var end = start;
-  while(end < start + ms) {
-    end = new Date().getTime();
- }
-}
 
 // 설치시 실행되는 함수
 // 로그인 정보 쿠키에 저장해준다.
@@ -54,7 +47,8 @@ chrome.runtime.onInstalled.addListener(() => {
             // 저장하기
             chrome.storage.sync.set({"isLogin": true, "username": username})
             
-            initUser(username, starcount)
+            initUser(username)
+            console.log("==api) inituser 완료")
             // message passing: contentScript를 통해서 보내준다.
               // contentScript에 메세지 보내주기
               chrome.tabs.query({active: true, currentWindow: true,}, (tabs) => {
@@ -102,7 +96,6 @@ chrome.runtime.onInstalled.addListener(() => {
                     else {
                       console.log(response)
                     }
-                    // clickedRepo(username, "")
                   })
                 }
               })
@@ -125,7 +118,6 @@ chrome.webNavigation.onCompleted.addListener((details)=>{
   if (validateGithubView(details.url)){
     // 깃헙 레포를 구경했다.
     console.log("깃헙 레포 구경함~")
-
     // contentScript에 메세지 보내주기
     chrome.tabs.query({
         active: true,
@@ -134,8 +126,13 @@ chrome.webNavigation.onCompleted.addListener((details)=>{
       (tabs) => {
         if (tabs.length > 0) {
           chrome.tabs.sendMessage(tabs[0].id, {"username": username}, (response)=>{
-            console.log(response)
-            // clickedRepo(username, "")
+            console.log(response) // 형식: { "repoid": int }
+            repoid = Number(response.repoid)
+
+            if (repoid != null && username != "" && username != null){
+              clickedRepo(username, repoid)
+              console.log("==api) clickedRepo 완료: " + {username} + " "+ {repoid})
+            }
           })
         }
       }

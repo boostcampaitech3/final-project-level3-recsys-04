@@ -16,15 +16,15 @@ export interface RepoList {
 }
 
 // 최초 repository init시
-export async function initUser(username: string, starcount: number) : Promise<any> {
-  fetch(`${baseURL}/init/${username}/${starcount}`)
+export async function initUser(username: string) : Promise<any> {
+  fetch(`${baseURL}/init/${username}`)
   .then(res => {
     //fetch를 통해 받아온 res객체 안에
     //ok 프로퍼티가 있음
       if (!res.ok) {
         throw Error("could not fetch the data that resource");
       }
-      return res.json();
+      return null
     })
     .catch(err => {
       console.log(err)
@@ -46,25 +46,33 @@ export async function coldstart() : Promise<any> {
   }
 
 // 레포지토리를 구경할 때
-export async function clickedRepo(username: string, repoId:string) : Promise<any> {
-  fetch(`${baseURL}/clicked/repo`, makeBody({'username': username, 'repoId': repoId}))
-  .then(res => {
-    //fetch를 통해 받아온 res객체 안에
-    //ok 프로퍼티가 있음
-      if (!res.ok) {
-        throw Error("could not fetch the data that resource");
-      }
-      return res.json();
-    })
-    .catch(err => {
-      console.log(err)
-    //에러시 Loading메세지 사라지고
-    //에러메세지만 보이도록 설정
-    });
+export async function clickedRepo(username: string, repoId:number) : Promise<any> {
+  console.log( JSON.stringify({username: username, repoId: repoId}))
+  const res = await fetch(`${baseURL}/clicked/repo`, {
+    // Adding method type
+    method: "POST",
+    // Adding body or contents to send
+    body: JSON.stringify({username: username, repoId: repoId}),
+    // Adding headers to the request
+    headers: {
+        "Content-type": "application/json; charset=UTF-8"
+    }
+}
+  
+  
+  )
+	// 404 처리하기
+	if (!res.ok) {
+    // return ar
+		throw new Error('Repo not found')
+	}
+  else {
+    console.log("clickedRepo 완료")
+  }
 }
 
 // github repo에 star을 한다
-export async function star(username: string, repoId:string) : Promise<any> {
+export async function starClick(username: string, repoId:string) : Promise<any> {
   fetch(`${baseURL}/update/starred/repo/${username}/${repoId}`)
   .then(res => {
     //fetch를 통해 받아온 res객체 안에
@@ -72,12 +80,10 @@ export async function star(username: string, repoId:string) : Promise<any> {
       if (!res.ok) {
         throw Error("could not fetch the data that resource");
       }
-      return res.json();
+      return null
     })
     .catch(err => {
       console.log(err)
-    //에러시 Loading메세지 사라지고
-    //에러메세지만 보이도록 설정
     });
 }
 

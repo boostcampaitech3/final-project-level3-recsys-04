@@ -42,16 +42,16 @@ const RepoCard: React.FC<{
 
   return(
     <div> {repoData.map((repo, index) => (
-        <Card onClick={()=>{
-          window.open(repoToURL(repo));
-        }} >
-        <CardContent>
-          <Typography variant="h5">{repo.repo_name}</Typography>
-          {/* <Typography variant="h5">{repo.description}</Typography>
-          <Typography variant="h5">{repo.languages}</Typography> */}
-          <Typography variant="h5">{repo.stars}</Typography>
-        </CardContent>
+        <div>
+        <Card variant="outlined" onClick={()=>{ window.open(repoToURL(repo)); }} >
+          <CardContent>
+            <Typography variant="h6">{repo.repo_name}</Typography>
+            <Typography variant="body2">{"🦚" + repo.category.category_L + ">" + repo.category.category_M + ">" + repo.category.category_S}</Typography>
+            <Typography variant="body2">{"⭐️ " + repo.stars}</Typography>
+          </CardContent>
         </Card>
+        <p>&nbsp;</p>
+      </div>
         ))}
     </div>
   )

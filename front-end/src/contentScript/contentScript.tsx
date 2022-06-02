@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import {inference} from '../utils/api'
+import {starClick} from '../utils/api'
 import ReactDOM from 'react-dom'
 
 import RepoCard from '../popup/RepoCard'
@@ -7,6 +7,7 @@ import ColdStartCards from '../popup/ColdStart'
 
 var find = null
 var username = null
+var repoid = null
 
 // 깃헙 레포이면 background에서 메세지를 받는다. 
 // 밑에 코드와 합치지 못하는 이유는 합치면 정상 작동하지 않기 때문.
@@ -36,7 +37,11 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse)=>{
   }
   if ("username" in msg){ // 추천을 해줘야 함
     var repoidtag = document.querySelector('meta[name="octolytics-dimension-repository_id"]')  as HTMLMetaElement
-    sendResponse({"repoid": repoidtag.content})
+    repoid = repoidtag.content
+    
+    if (repoid != null && repoid != ""){
+      sendResponse({"repoid": repoidtag.content})
+    }
     return true
   }
 })
@@ -81,6 +86,7 @@ var star = document.querySelector(".js-toggler-target.rounded-left-2.btn-sm.btn.
 if (star!=null){
   star.addEventListener('click', function(){
     console.log("스타 클릭!")
+    starClick(username, repoid)
   })  // 이거 코드는 정상 동작 하고 있음.
 }
 
