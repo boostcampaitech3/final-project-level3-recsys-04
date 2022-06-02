@@ -15,6 +15,7 @@ const UserSchema = require("./lib/schema_user");
 const RepoSchema = require("./lib/schema_repo");
 const PopSchema = require("./lib/schema_pop");
 const SimSchema = require("./lib/schema_sim");
+const my_token = process.env.my_token;
 mongoose.Promise = global.Promise; // Node 의 네이티브 Promise 사용
 // mongodb 연결
 const conn = mongoose.connect(process.env.MONGO_URI)
@@ -46,8 +47,8 @@ app.use(bodyParser.urlencoded());
 app.use(cors());
 
 var router = require('./router/main')(app, conn);
-var init = require('./lib/init')(app, UserSchema, RepoSchema, mongoose);
-var update = require('./lib/update')(app, UserSchema, RepoSchema, mongoose); 
+var init = require('./lib/init')(app, UserSchema, RepoSchema, mongoose, my_token);
+var update = require('./lib/update')(app, UserSchema, RepoSchema, mongoose, my_token); 
 var inference = require('./lib/inference')(app, UserSchema, RepoSchema, PopSchema, SimSchema, mongoose);
 var coldstart = require('./lib/coldstart')(app, UserSchema, RepoSchema, PopSchema, mongoose);
 var clicked = require('./lib/clicked')(app, UserSchema, RepoSchema, mongoose);

@@ -16,7 +16,8 @@ const RepoSchema = new mongoose.Schema({
 								"category_S": String
 							},
 	"updated_at": Date,
-	"star_user_list": Array
+	"star_user_list": Array,
+	"description": String
 })
 
 module.exports = mongoose.model('repository', RepoSchema)
