@@ -1,4 +1,4 @@
-const baseURL = 'https://127.0.0.1:3001'
+const baseURL = 'https://34.64.94.140:3001'
 export interface Repo {
   repo_name: string,
   login: string
