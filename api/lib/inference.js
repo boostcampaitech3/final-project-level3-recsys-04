@@ -9,7 +9,7 @@ module.exports = function(app, UserSchema, RepoSchema, PopSchema, SimSchema, mon
         urids = jsondata.rids;
     });
     
-    app.get('/inference/indevelop/starred/repo/:username/:rid',function(req,res){
+    app.get('/inference/starred/repo/:username/:rid',function(req,res){
         let username = req.params.username;
         let current_repo = req.params.rid;
         current_repo *= 1;
@@ -42,7 +42,7 @@ module.exports = function(app, UserSchema, RepoSchema, PopSchema, SimSchema, mon
                 function getBody(){
                     return new Promise(function (resolve, reject){
                         const options = {
-                            uri:'http://localhost:30001/model',  //  http://0.0.0.0:8090/model
+                            uri:'http://118.67.130.15:30002/model',  //  http://0.0.0.0:8090/model
                             method: 'POST',
                             body: {
                             'rids': user_repos
@@ -80,6 +80,22 @@ module.exports = function(app, UserSchema, RepoSchema, PopSchema, SimSchema, mon
             Array.prototype.push.apply(sim_cf_repos, pop_repos);
             let candidate_repos = sim_cf_repos;
             res.json({"candidate_repos" : candidate_repos});
+        }
+        run();
+    });
+    
+    app.get('/inference/control/repo/:username/:rid',function(req,res){
+        let {username, current_repo} = req.params;
+        async function run(){
+            var Repos = await RepoSchema.find()
+
+                .limit(40)
+                .exec()
+                .catch(err => res.status(400).json({ message: err.message }))
+            // const result = Repos.filter(repo => repo.length > 6);
+            console.log(Repos);
+            // console.log(Repos.map(function(e){ return e.rid}));
+            res.json({"candidate_repos" : Repos});
         }
         run();
     });

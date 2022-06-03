@@ -64,7 +64,7 @@
     <tr>
         <td align="center"><a href="https://github.com/cow-coding">Github</a></td>
         <td align="center"><a href="#">Github</a></td>
-        <td align="center"><a href="#">Github</a></td>
+        <td align="center"><a href="https://github.com/hawe66">Github</a></td>
         <td align="center"><a href="#">Github</a></td>
         <td align="center"><a href="#">Github</a></td>
     </tr>
@@ -76,7 +76,7 @@
           <code>태그1</code>
         </td>
         <td align="center">
-          <code>태그1</code>
+          <code>API 코드</code>
         </td>
         <td align="center">
           <code>태그1</code>
@@ -114,6 +114,8 @@
 ### Front-End
 
 ### Back-End
+
+- [Running API server](https://github.com/boostcampaitech3/final-project-level3-recsys-04/tree/main/api)
 
 ### Model
 
