@@ -14,6 +14,27 @@ import {
   PaginationItem
 } from '@mui/material'
 
+
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: 'BlinkMacSystemFont',
+      textTransform: 'none',
+      fontSize: 14,
+    },
+    subtitle1: {
+      fontFamily: 'BlinkMacSystemFont',
+      textTransform: 'none',
+      fontSize: 18,
+      fontWeight: 2000
+    }
+  },
+});
+
+
+
 const ColdStartCards: React.FC<{}> = ({}) => {
   // 뷰 안에서 data를 track 하기 위해서
   const [category_m1, set_category_m1] = useState<Repo[][]|null>(null)
@@ -48,17 +69,22 @@ const ColdStartCards: React.FC<{}> = ({}) => {
 
   return(
     <div> 
-      <h1> ColdStart! </h1>
+      {
+        <Typography >{"ColdStart!"}</Typography>
+      }
     {
       category_m1[page_num].map((repo, index) => (
         <div>
-          <Card variant="outlined" onClick={()=>{ window.open(repoToURL(repo)); }} >
+        <ThemeProvider theme={theme}>
+          <Card onClick={()=>{ window.open(repoToURL(repo)); }} >
             <CardContent>
-              <Typography variant="h6">{repo.repo_name}</Typography>
-              <Typography variant="body2">{"🦚" + repo.category.category_L + ">" + repo.category.category_M + ">" + repo.category.category_S}</Typography>
+              <Typography variant="subtitle1">{repo.repo_name}</Typography>
+              <Typography>{"📚" + repo.category.category_L + " > " + repo.category.category_M + " > " + repo.category.category_S}</Typography>
               <Typography variant="body2">{"⭐️ " + repo.stars}</Typography>
+              <Typography variant="body2">{"🔎 " + repo.description}</Typography>
             </CardContent>
           </Card>
+          </ThemeProvider>
           <p>&nbsp;</p>
         </div>
       )

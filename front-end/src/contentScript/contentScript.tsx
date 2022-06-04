@@ -65,11 +65,16 @@ if (find != null){
     if (username != null){
       var myBody = document.createElement("div");
       find.insertBefore(myBody, null)
+
+      if (repoid == null){
+        var repoidtag = document.querySelector('meta[name="octolytics-dimension-repository_id"]')  as HTMLMetaElement
+        repoid = repoidtag.content
+      }
       var Recommendation: React.FC<{}> = () => {
         return (
           <div>
             <h2>마음에 들조의 추천</h2>
-              <RepoCard username={'jonyejin'} ></RepoCard>
+              <RepoCard username={'jonyejin'} repoId={repoid} ></RepoCard>
           </div>
         )}
       ReactDOM.render(<Recommendation />, myBody)

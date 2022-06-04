@@ -12,17 +12,35 @@ import {
   Typography,
 } from '@mui/material'
 
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: 'BlinkMacSystemFont',
+      textTransform: 'none',
+      fontSize: 14,
+    },
+    subtitle1: {
+      fontFamily: 'BlinkMacSystemFont',
+      textTransform: 'none',
+      fontSize: 18,
+      fontWeight: 2000
+    }
+  },
+});
+
 // WIP: Container와 Card?
-const RepoCard: React.FC<{
-  username: string
-}> = ({ username }) => {
+const RepoCard: React.FC<{username: string
+  repoId: number}> = ({ username, repoId }) => {
   // 뷰 안에서 data를 track 하기 위해서
   const [repoData, setRepoData] = useState<Repo[]|[]>([])
 
   // API 호출해주기
   useEffect(()=> {
     console.log("useEffect 나타남")
-    inference(username, 12345)
+
+    inference(username, repoId)
     .then((data)=>{
       return data.candidate_repos
     })
@@ -43,13 +61,16 @@ const RepoCard: React.FC<{
   return(
     <div> {repoData.map((repo, index) => (
         <div>
-        <Card variant="outlined" onClick={()=>{ window.open(repoToURL(repo)); }} >
-          <CardContent>
-            <Typography variant="h6">{repo.repo_name}</Typography>
-            <Typography variant="body2">{"🦚" + repo.category.category_L + ">" + repo.category.category_M + ">" + repo.category.category_S}</Typography>
-            <Typography variant="body2">{"⭐️ " + repo.stars}</Typography>
-          </CardContent>
-        </Card>
+        <ThemeProvider theme={theme}>
+          <Card onClick={()=>{ window.open(repoToURL(repo)); }} >
+            <CardContent>
+              <Typography variant="subtitle1">{repo.repo_name}</Typography>
+              <Typography>{"📚" + repo.category.category_L + " > " + repo.category.category_M + " > " + repo.category.category_S}</Typography>
+              <Typography variant="body2">{"⭐️ " + repo.stars}</Typography>
+              <Typography variant="body2">{"🔎 " + repo.description}</Typography>
+            </CardContent>
+          </Card>
+          </ThemeProvider>
         <p>&nbsp;</p>
       </div>
         ))}

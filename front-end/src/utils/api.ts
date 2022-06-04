@@ -8,7 +8,7 @@ export interface Repo {
     category_M: string,
     category_S: string
   }
-  // description: string,
+  description: string,
   // url: string  
 }
 export interface RepoList {
@@ -35,8 +35,8 @@ export async function initUser(username: string) : Promise<any> {
 
 // coldstart(설치시)
 export async function coldstart() : Promise<any> {
-  console.log(`${baseURL}/coldstart`)
-  const res = await fetch(`${baseURL}/coldstart`)
+  console.log(`${baseURL}/coldstart/ver2`)
+  const res = await fetch(`${baseURL}/coldstart/ver2`)
 	// 404 처리하기
 	if (!res.ok) {
     // return ar
