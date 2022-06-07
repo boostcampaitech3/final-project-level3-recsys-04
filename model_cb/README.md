@@ -1,4 +1,4 @@
-# Contents-Based Recommendation + Best Seller  
+# Contents-Based + Best Seller Recommendation
 ### Requirements
 ```bash
 pip install -r requirements.txt
