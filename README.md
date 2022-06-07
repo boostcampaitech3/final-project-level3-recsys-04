@@ -6,19 +6,21 @@
 
 ## Contents
 
-- [👩🏻‍💻👨🏻‍💻 Members](#-members)
-- [📱 Demo](#demo)
-- [🛠 Service Architecture](#-service-architecture)
-- [📁 Dataset](#-dataset)
-- [❗️ About Service](#about-service)
-  - [왜 개발하게 되었나요?](#왜-개발하게-되었나요)
-  - [서비스 개발 방향](#서비스-개발-방향)
-  - [참고자료](#참고자료)
-- [❓ How to use](#-how-to-use)
-  - [Front-End](#front-end)
-  - [Back-End](#back-end)
-  - [Model](#model)
-  - [Data Pipeline](#data-pipeline)
+- [💻 Github You may also Like](#-github-you-may-also-like)
+  - [Contents](#contents)
+  - [👩🏻‍💻👨🏻‍💻 Members](#-members)
+  - [📱 Demo](#-demo)
+  - [🛠 Service Architecture](#-service-architecture)
+  - [📁 Dataset](#-dataset)
+  - [❗️ About Service](#️-about-service)
+    - [왜 개발하게 되었나요?](#왜-개발하게-되었나요)
+    - [서비스 개발 방향](#서비스-개발-방향)
+    - [참고자료](#참고자료)
+  - [❓ How to use](#-how-to-use)
+    - [Front-End](#front-end)
+    - [Back-End](#back-end)
+    - [Model](#model)
+    - [Data Pipeline](#data-pipeline)
 
 ## 👩🏻‍💻👨🏻‍💻 Members
 
@@ -63,26 +65,26 @@
     </tr>
     <tr>
         <td align="center"><a href="https://github.com/cow-coding">Github</a></td>
-        <td align="center"><a href="#">Github</a></td>
+        <td align="center"><a href="https://github.com/sunbi-s">Github</a></td>
         <td align="center"><a href="https://github.com/hawe66">Github</a></td>
-        <td align="center"><a href="#">Github</a></td>
-        <td align="center"><a href="#">Github</a></td>
+        <td align="center"><a href="https://sweetdev.tistory.com">Blog</a></td>
+        <td align="center"><a href="https://github.com/pilkyuchoi">Github</a></td>
     </tr>
     <tr>
         <td align="center">
           <code>데이터ETL</code> <code>배치학습</code> <code>DBA</code>
         </td>
         <td align="center">
-          <code>태그1</code>
+          <code>RecVAE</code> <code>FastAPI</code> <code>비동기 처리</code>
         </td>
         <td align="center">
           <code>API 코드</code>
         </td>
         <td align="center">
-          <code>태그1</code>
+          <code>크롬익스텐션</code> <code>React+TS</code>
         </td>
         <td align="center">
-          <code>태그1</code>
+          <code>인기도</code> <code>문서 임베딩</code> <code>그래프 임베딩</code>
         </td>
     </tr>
 </table>
