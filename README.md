@@ -6,21 +6,19 @@
 
 ## Contents
 
-- [💻 Github You may also Like](#-github-you-may-also-like)
-  - [Contents](#contents)
-  - [👩🏻‍💻👨🏻‍💻 Members](#-members)
-  - [📱 Demo](#-demo)
-  - [🛠 Service Architecture](#-service-architecture)
-  - [📁 Dataset](#-dataset)
-  - [❗️ About Service](#️-about-service)
-    - [왜 개발하게 되었나요?](#왜-개발하게-되었나요)
-    - [서비스 개발 방향](#서비스-개발-방향)
-    - [참고자료](#참고자료)
-  - [❓ How to use](#-how-to-use)
-    - [Front-End](#front-end)
-    - [Back-End](#back-end)
-    - [Model](#model)
-    - [Data Pipeline](#data-pipeline)
+- [👩🏻‍💻👨🏻‍💻 Members](#-members)
+- [📱 Demo](#demo)
+- [🛠 Service Architecture](#-service-architecture)
+- [📁 Dataset](#-dataset)
+- [❗️ About Service](#about-service)
+  - [왜 개발하게 되었나요?](#왜-개발하게-되었나요)
+  - [서비스 개발 방향](#서비스-개발-방향)
+  - [참고자료](#참고자료)
+- [❓ How to use](#-how-to-use)
+  - [Front-End](#front-end)
+  - [Back-End](#back-end)
+  - [Model](#model)
+  - [Data Pipeline](#data-pipeline)
 
 ## 👩🏻‍💻👨🏻‍💻 Members
 
