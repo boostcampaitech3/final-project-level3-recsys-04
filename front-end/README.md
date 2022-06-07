@@ -1,7 +1,7 @@
 # 💻 Github You may also Like Chrome Extension
 
 ## Architecture
-![image][final-project-level3-recsys-04/front-end/front_architecture.png]
+![image](https://user-images.githubusercontent.com/77298353/172320115-17fd6308-7cfa-462c-b8f8-efea82a32ff6.png)
 
 ## Build
 
