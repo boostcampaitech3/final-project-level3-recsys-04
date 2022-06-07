@@ -1,7 +1,7 @@
 # 💻 Github You may also Like Chrome Extension
 
 ## Architecture
-![.front_architecture.png](https://user-images.githubusercontent.com/77298353/172318471-8b156d2b-91eb-44e8-81c7-97b496f773be.png)
+![image][final-project-level3-recsys-04/front-end/front_architecture.png]
 
 ## Build
 
@@ -16,7 +16,8 @@
 3. Click `Load unpacked`
 4. Select the entire `dist` folder
 
-## Rights for Extension Icon 
-* icon link: https://icons8.kr/icons/set/black-cat
-* To use icon, HTML tag always needed.
-<a target="_blank" href="https://icons8.com/icon/ioK5DV1dWIhO/black-cat">Black Cat</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
+## Rights
+* [icon link](https://icons8.kr/icons/set/black-cat)
+  * To use icon, HTML tag is always needed.
+    * `<a target="_blank" href="https://icons8.com/icon/ioK5DV1dWIhO/black-cat">Black Cat</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>`
+* [Chrome Extension Template](https://github.com/JasonXian/react-chrome-extension-boilerplate)
