@@ -13,7 +13,7 @@ doc_similarity.ipynb
 - Update in DB
 ### Graph Embedding Similarity
 ```bash
-graph/graph_similarity.ipynb
+graph_similarity.ipynb
 ```
 - Prepare User-Star-Repository Graph dataset
 - Pytorch-BigGraph
