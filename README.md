@@ -1,8 +1,6 @@
-<style>
-  table img {
-    max-height
-  }
-</style>
+<div>
+  <img src="./img/boostcamp_logo.png"/>
+</div>
 
 # 💻 Github You may also Like
 
@@ -14,6 +12,10 @@
   - [Demo](#demo)
   - [🛠 Service Architecture](#-service-architecture)
   - [📁 Dataset](#-dataset)
+  - [About Service](#about-service)
+    - [왜 개발하게 되었나요?](#왜-개발하게-되었나요)
+    - [서비스 개발 방향](#서비스-개발-방향)
+    - [참고자료](#참고자료)
   - [❓ How to use](#-how-to-use)
     - [Front-End](#front-end)
     - [Back-End](#back-end)
@@ -89,11 +91,11 @@
 
 ## Demo
 
-- 데모 GIF
+![](/img/demo.gif)
 
 ## 🛠 Service Architecture
 
-- 아키텍처 사진
+![](/img/total_service.png)
 
 ## 📁 Dataset
 
@@ -109,15 +111,53 @@
     - [React](https://github.com/enaqx/awesome-react#readme)
     - [Vue.js](https://github.com/vuejs/awesome-vue#readme)
 
+## About Service
+
+- Github repository 개인화 추천 서비스
+- 인기도, 유사도, 사용자 선호도 기반의 추천 리스트 제공
+- 사용자 편의성을 위한 크롬 익스텐션 기반 서비스
+  - Github.com에서 바로 확인 가능한 추천 목록 제공
+  - 방문 repository 페이지에서 유사한 repository 추천 목록 제공
+  - 신규 사용자를 위한 인기도 기반의 초기 서비스 제공 (Cold-Start 방지)
+
+### 왜 개발하게 되었나요?
+
+기존 Github에서 사용자가 원하는 repository를 찾는 방법은 크게 2가지가 있습니다. 
+
+1. 이름 및 태그 등 repository 메타데이터를 통한 사용자의 직접 검색
+2. 사용자 메타데이터를 사용한 github 자체의 Explore를 사용
+
+위의 두 방법은 **사용자가 스스로 관심사를 명확히 알아야 한다**는 것과 **Explore탭의 새로운 아이템 갱신 빈도가 낮다는 점**이 핵심적인 문제점으로 작용합니다.  
+추천 서비스는 사용자의 불편함을 최소화하여 사용자가 필요로 하는 정보를 제공하는 것이 핵심이라고 생각하여 저희가 파악한 문제를 해결하고자 Github repository 추천 서비스를 개발하게 되었습니다.
+
+### 서비스 개발 방향
+
+서비스에서 해결할 가장 큰 문제는 다음과 같았습니다.
+
+- 사용자의 액션을 최소화하는 것
+- 서비스 초기 사용자 및 새롭게 깃허브를 사용하는 유저에 대한 cold-start 문제
+- 사용자에게 제공하는 추천 목록을 생성하는 모델 선정
+
+대표적인 문제들을 해결하기위해 크롬 익스텐션을 활용하여 github.com 페이지 내에 추천 목록을 삽입하였고 인기도, 유사도, 사용자 선호도 기반의 모델 총 3개의 모델을 혼합하여 추천 리스트를 생성했습니다. 추천 시스템의 난제 중 하나인 cold-start 문제는 초기에 인기도 기반으로 추천목록을 제공하는 방식으로 해결하였습니다.
+
+### 참고자료
+
+- [발표자료]()
+
 ## ❓ How to use
 
 ### Front-End
+
+- [Chrome Extension](https://github.com/boostcampaitech3/final-project-level3-recsys-04/tree/main/front-end)
 
 ### Back-End
 
 - [Running API server](https://github.com/boostcampaitech3/final-project-level3-recsys-04/tree/main/api)
 
 ### Model
+
+- [Model CF Server/Manual](https://github.com/boostcampaitech3/final-project-level3-recsys-04/tree/main/model_cf/Server)
+- [Model CB Manual](https://github.com/boostcampaitech3/final-project-level3-recsys-04/tree/main/model_cb)
 
 ### Data Pipeline
 
