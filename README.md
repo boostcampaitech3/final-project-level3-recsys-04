@@ -142,7 +142,7 @@
 
 ### 참고자료
 
-- [발표자료]()
+- [발표자료](https://github.com/boostcampaitech3/final-project-level3-recsys-04/blob/main/img/presentation.pdf)
 
 ## ❓ How to use
 
