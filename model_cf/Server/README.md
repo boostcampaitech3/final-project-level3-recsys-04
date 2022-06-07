@@ -3,7 +3,7 @@
 - 정해진 시간마다 DB에서 mmodel.pt를 다운 받아서 model 업데이트를 진행 
 
 ## How to start
-- main.py 실행시 uvicorn 을 통해 server를 가동   
+- main.py 실행시 uvicorn 을 통해 server 가동   
   - ~# python main.py  
   - server: uvicorn   
   - port: 8090
