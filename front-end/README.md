@@ -1,7 +1,7 @@
 # 💻 Github You may also Like Chrome Extension
 
 ## Architecture
-![image][front_architecture.png]
+![.front_architecture.png](https://user-images.githubusercontent.com/77298353/172318471-8b156d2b-91eb-44e8-81c7-97b496f773be.png)
 
 ## Build
 
