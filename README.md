@@ -73,7 +73,7 @@
           <code>데이터ETL</code> <code>배치학습</code> <code>DBA</code>
         </td>
         <td align="center">
-          <code>RecVAE</code> <code>FastAPI</code> <code>비동기 처리</code>
+          <code>RecVAE</code> <code>FastAPI</code> <br> <code>비동기 처리</code>
         </td>
         <td align="center">
           <code>API 코드</code>
@@ -82,7 +82,7 @@
           <code>크롬익스텐션</code> <code>React+TS</code>
         </td>
         <td align="center">
-          <code>인기도</code> <code>문서 임베딩</code> <code>그래프 임베딩</code>
+          <code>인기도</code> <code>문서 임베딩</code> <br> <code>그래프 임베딩</code>
         </td>
     </tr>
 </table>
