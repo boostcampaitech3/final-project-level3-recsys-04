@@ -26,9 +26,9 @@
 
 ## Model update
 매일 KDT PM 5시에 model.pt를 다운받아 자동으로 model 업데이트
-- udate 시간 변경 
+- update 시간 변경 
   - check_model_update() 에서 wait_until() 의 입력값을 수정 ex) wait_until(hour, minute)
-- udate 기간 변경 
+- update 기간 변경 
   - check_model_update() 에서 asyncio.sleep() 입력값을 수정 (단위는 second)
 
 ## Notice
