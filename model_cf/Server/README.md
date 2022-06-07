@@ -1,6 +1,7 @@
 # CF(Collaborative Filtering) Inference Server
 - 메인 서버와 API로 소통하며 user의 repo 방문 기록을 전달받으면 repo 추천 목록을 반환
-- 정해진 시간마다 DB에서 mmodel.pt를 다운 받아서 model 업데이트를 진행 
+- 정해진 시간마다 DB에서 mmodel.pt를 다운 받아서 model 업데이트를 진행
+- 사용된 model은 RecVAE  
 
 ## How to start
 - main.py 실행시 uvicorn 을 통해 server 가동   
@@ -30,6 +31,16 @@
   - check_model_update() 에서 wait_until() 의 입력값을 수정 ex) wait_until(hour, minute)
 - update 기간 변경 
   - check_model_update() 에서 asyncio.sleep() 입력값을 수정 (단위는 second)
+
+## Model
+- RecVAE 
+```
+The official PyTorch implementation of the paper "RecVAE: A New Variational Autoencoder for Top-N Recommendations with Implicit Feedback".
+
+Some sources from  [Variational autoencoders for collaborative filtering](https://github.com/dawenl/vae_cf) is partially used.
+
+If you used this code for a publication, please cite our WSDM'20 paper
+```
 
 ## Notice
 보안상으로 이유로 DB 관련 config 파일은 github에 존재하지 않음
