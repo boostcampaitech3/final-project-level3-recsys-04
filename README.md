@@ -7,10 +7,10 @@
 ## Contents
 
 - [👩🏻‍💻👨🏻‍💻 Members](#-members)
-- [Demo](#demo)
+- [📱 Demo](#demo)
 - [🛠 Service Architecture](#-service-architecture)
 - [📁 Dataset](#-dataset)
-- [About Service](#about-service)
+- [❗️ About Service](#about-service)
   - [왜 개발하게 되었나요?](#왜-개발하게-되었나요)
   - [서비스 개발 방향](#서비스-개발-방향)
   - [참고자료](#참고자료)
@@ -87,9 +87,11 @@
     </tr>
 </table>
 
-## Demo
+## 📱 Demo
 
-![](/img/demo.gif)
+<div align="center">
+  <img src="/img/demo.gif"/>
+</div>
 
 ## 🛠 Service Architecture
 
@@ -109,7 +111,7 @@
     - [React](https://github.com/enaqx/awesome-react#readme)
     - [Vue.js](https://github.com/vuejs/awesome-vue#readme)
 
-## About Service
+## ❗️ About Service
 
 - Github repository 개인화 추천 서비스
 - 인기도, 유사도, 사용자 선호도 기반의 추천 리스트 제공
