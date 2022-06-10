@@ -82,7 +82,7 @@
           <code>크롬익스텐션</code> <code>React+TS</code>
         </td>
         <td align="center">
-          <code>Model</code> <code>문서 </code> <br> <code>그래프 임베딩</code>
+          <code>Contents Based</code> <code>문서 임베딩</code> <br> <code>그래프 임베딩</code>
         </td>
     </tr>
 </table>
